@@ -1,0 +1,93 @@
+[
+  {
+    "id": "pm-kisan",
+    "title_hi": "प्रधानमंत्री किसान सम्मान निधि (PM-KISAN)",
+    "title_en": "PM Kisan Samman Nidhi",
+    "category": "farmer",
+    "benefit": "₹6,000 प्रति वर्ष (3 किस्तों में ₹2,000 सीधे बैंक खाते में)",
+    "eligibility": "सभी भूमिधारक किसान परिवार जिनके पास खेती योग्य भूमि है।",
+    "documents_needed": [
+      "आधार कार्ड (Aadhaar)",
+      "खतौनी/भूलेख (Land Records)",
+      "बैंक पासबुक (Bank Passbook)"
+    ],
+    "official_url": "https://pmkisan.gov.in",
+    "voice_summary": "पीएम किसान योजना में छोटे और सीमांत किसानों को हर चार महीने में दो हजार रुपये, यानी साल में छह हजार रुपये सीधे बैंक खाते में मिलते हैं।"
+  },
+  {
+    "id": "ayushman-bharat",
+    "title_hi": "आयुष्मान भारत - जन आरोग्य योजना (PM-JAY)",
+    "title_en": "Ayushman Bharat PMJAY",
+    "category": "health",
+    "benefit": "प्रति परिवार ₹5,00,000 तक का मुफ्त कैशलेस इलाज अस्पताल में",
+    "eligibility": "SECC डेटा व राशन कार्ड पात्रता सूची में शामिल गरीब और वंचित परिवार।",
+    "documents_needed": [
+      "राशन कार्ड (Ration Card)",
+      "आधार कार्ड (Aadhaar)"
+    ],
+    "official_url": "https://pmjay.gov.in",
+    "voice_summary": "आयुष्मान भारत कार्ड से किसी भी सूचीबद्ध सरकारी या प्राइवेट अस्पताल में पांच लाख रुपये तक का मुफ्त इलाज और दवाएं मिलती हैं।"
+  },
+  {
+    "id": "pm-awas-gramin",
+    "title_hi": "प्रधानमंत्री आवास योजना - ग्रामीण (PMAY-G)",
+    "title_en": "PM Awas Yojana Gramin",
+    "category": "housing",
+    "benefit": "पक्का मकान बनाने के लिए ₹1,20,000 से ₹1,30,000 की सीधी आर्थिक सहायता",
+    "eligibility": "ग्रामीण बेघर परिवार अथवा कच्चे व जर्जर मकानों में रहने वाले लोग।",
+    "documents_needed": [
+      "आधार कार्ड",
+      "जॉब कार्ड (MGNREGA)",
+      "बैंक खाता विवरण",
+      "आय प्रमाण पत्र"
+    ],
+    "official_url": "https://pmayg.nic.in",
+    "voice_summary": "ग्रामीण आवास योजना में बेघर या कच्चे मकान वाले परिवारों को पक्का घर बनाने के लिए एक लाख बीस हजार रुपये तक की किस्तें मिलती हैं।"
+  },
+  {
+    "id": "nsp-scholarship",
+    "title_hi": "राष्ट्रीय छात्रवृत्ति पोर्टल (NSP Post-Matric)",
+    "title_en": "National Scholarship Portal Post-Matric",
+    "category": "student",
+    "benefit": "कॉलेज/आईटीआई ट्यूशन फीस माफी एवं ₹12,000 तक वार्षिक छात्रवृत्ति",
+    "eligibility": "10वीं/12वीं पास विद्यार्थी जिनकी पारिवारिक आय ₹2.5 लाख से कम है।",
+    "documents_needed": [
+      "10वीं/12वीं मार्कशीट",
+      "आय प्रमाण पत्र (Income Cert)",
+      "जाति प्रमाण पत्र",
+      "आधार कार्ड"
+    ],
+    "official_url": "https://scholarships.gov.in",
+    "voice_summary": "दसवीं पास करने के बाद आगे की पढ़ाई के लिए राष्ट्रीय छात्रवृत्ति के तहत सरकारी फीस माफ होती है और आर्थिक सहायता मिलती है।"
+  },
+  {
+    "id": "ladli-behna",
+    "title_hi": "लाडली बहना / महतारी वंदन योजना",
+    "title_en": "Ladli Behna Scheme",
+    "category": "woman",
+    "benefit": "हर महीने ₹1,250 की सीधी सहायता सीधे महिला के बैंक खाते में",
+    "eligibility": "21 से 60 वर्ष की विवाहित/कल्याणी/परित्यक्ता महिलाएं जिनकी पारिवारिक आय ₹2.5 लाख से कम हो।",
+    "documents_needed": [
+      "समग्र आईडी / परिवार पहचान पत्र",
+      "आधार कार्ड",
+      "डीबीटी सक्षम बैंक खाता"
+    ],
+    "official_url": "https://cmladlibahna.mp.gov.in",
+    "voice_summary": "इस योजना के माध्यम से महिलाओं को हर महीने सवा बारह सौ रुपये सीधे उनके आधार लिंक बैंक खाते में दिए जाते हैं।"
+  },
+  {
+    "id": "eshram-card",
+    "title_hi": "ई-श्रम कार्ड (E-Shram Card)",
+    "title_en": "e-Shram National Database of Unorganised Workers",
+    "category": "labour",
+    "benefit": "₹2 लाख का मुफ्त दुर्घटना बीमा + सरकारी आपदाओं में सीधी नकद सहायता",
+    "eligibility": "असंगठित क्षेत्र के मजदूर, रेहड़ी-पटरी वाले, प्रवासी श्रमिक और दैनिक वेतनभोगी।",
+    "documents_needed": [
+      "आधार कार्ड",
+      "आधार लिंक मोबाइल नंबर",
+      "बैंक खाता नंबर"
+    ],
+    "official_url": "https://eshram.gov.in",
+    "voice_summary": "ई-श्रम कार्ड बनवाने पर दो लाख का दुर्घटना बीमा मुफ्त मिलता है और आपातकालीन सरकारी आर्थिक सहायता सीधे मिलती है।"
+  }
+]

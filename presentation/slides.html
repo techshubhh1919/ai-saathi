@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Saathi — Hackathon Pitch Deck (8 Slides)</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@500;700;800&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+      background: #0B1120;
+      color: #F8FAFC;
+    }
+    .hindi-font {
+      font-family: 'Mukta', sans-serif;
+    }
+    .slide {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+    .slide.active {
+      display: flex;
+      opacity: 1;
+    }
+  </style>
+</head>
+<body class="h-screen w-screen flex flex-col justify-between p-6 sm:p-12 select-none overflow-hidden">
+
+  <!-- Top Bar -->
+  <header class="flex items-center justify-between border-b border-slate-800 pb-4">
+    <div class="flex items-center space-x-3">
+      <div class="w-10 h-10 rounded-xl bg-amber-500 text-slate-950 font-black flex items-center justify-center text-xl">
+        <span>सा</span>
+      </div>
+      <div>
+        <h1 class="font-extrabold text-lg tracking-tight">एआई साथी (AI Saathi)</h1>
+        <p class="text-xs text-slate-400">Digital Inclusion & Civic AI Pitch Deck</p>
+      </div>
+    </div>
+    <div class="flex items-center space-x-4 text-xs font-bold text-slate-400">
+      <span id="slide-indicator" class="bg-slate-800 px-3 py-1.5 rounded-lg text-amber-400 border border-slate-700">Slide 1 of 8</span>
+      <span class="hidden sm:inline">Use [←] and [→] Arrow Keys to Navigate</span>
+    </div>
+  </header>
+
+  <!-- SLIDES VIEWPORT -->
+  <main class="flex-1 flex items-center justify-center my-6">
+
+    <!-- SLIDE 1: Title & Hook -->
+    <div class="slide active flex-col items-center text-center max-w-4xl space-y-6" id="slide-1">
+      <div class="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-amber-500/10 text-amber-400 border border-amber-500/30 text-xs font-bold uppercase tracking-wider">
+        <span>🇮🇳 Digital Inclusion Hackathon</span>
+      </div>
+      <h2 class="text-4xl sm:text-6xl font-black tracking-tight text-white leading-tight">
+        एआई साथी <span class="text-amber-400">(AI Saathi)</span>
+      </h2>
+      <p class="text-xl sm:text-2xl text-slate-300 font-medium max-w-2xl hindi-font">
+        "हर गाँव, हर नागरिक का सच्चा डिजिटल साथी"
+      </p>
+      <p class="text-base sm:text-lg text-slate-400 max-w-2xl leading-relaxed">
+        Voice-First Digital Services, Step-by-Step Form Guidance & Cyber Fraud Shield for 80+ Crore Rural Citizens.
+      </p>
+      <div class="pt-6 border-t border-slate-800/80 flex items-center space-x-6 text-sm text-slate-400">
+        <div><strong>Team:</strong> 2 Members</div>
+        <div><strong>Person A:</strong> AI & Backend Lead</div>
+        <div><strong>Person B:</strong> Product & Frontend Lead</div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: Ground Reality / Problem -->
+    <div class="slide flex-col max-w-4xl space-y-6 w-full" id="slide-2">
+      <div class="text-xs font-bold text-rose-400 uppercase tracking-wider">01. The Ground Reality</div>
+      <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Why Rural Citizens Are Excluded from Digital India</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4">
+        <div class="bg-slate-900/80 p-6 rounded-2xl border border-slate-800 space-y-3">
+          <div class="text-3xl">🗣️</div>
+          <h4 class="font-bold text-lg text-white">Language & Literacy</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            Government portals use bureaucratic, complex language. Farmers and village women cannot navigate English or text-heavy forms.
+          </p>
+        </div>
+        <div class="bg-slate-900/80 p-6 rounded-2xl border border-slate-800 space-y-3">
+          <div class="text-3xl">💸</div>
+          <h4 class="font-bold text-lg text-white">The "Dalal" Tax</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            Villagers travel 10–15 km to town cyber cafes, paying ₹200–₹500 fees to middle-men just to fill simple welfare applications.
+          </p>
+        </div>
+        <div class="bg-slate-900/80 p-6 rounded-2xl border border-slate-800 space-y-3">
+          <div class="text-3xl">🚨</div>
+          <h4 class="font-bold text-lg text-white">Rural Cyber Scams</h4>
+          <p class="text-sm text-slate-400 leading-relaxed">
+            Fake electricity disconnection SMS and lottery links trick first-time smartphone users into downloading APKs, losing savings.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: The Solution -->
+    <div class="slide flex-col max-w-4xl space-y-6 w-full" id="slide-3">
+      <div class="text-xs font-bold text-amber-400 uppercase tracking-wider">02. The Solution</div>
+      <h3 class="text-3xl sm:text-4xl font-extrabold text-white">AI Saathi: 4 Pillars of Rural Empowerment</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+        <div class="bg-slate-900/80 p-5 rounded-xl border border-slate-800 flex items-start space-x-4">
+          <div class="p-3 bg-amber-500/10 text-amber-400 rounded-lg text-2xl">🎙️</div>
+          <div>
+            <h4 class="font-bold text-white text-base">Voice-First Vernacular Interaction</h4>
+            <p class="text-xs text-slate-400 mt-1">Speak naturally in Hindi/regional dialects. Audio answers read aloud so anyone can listen.</p>
+          </div>
+        </div>
+        <div class="bg-slate-900/80 p-5 rounded-xl border border-slate-800 flex items-start space-x-4">
+          <div class="p-3 bg-emerald-500/10 text-emerald-400 rounded-lg text-2xl">🌾</div>
+          <div>
+            <h4 class="font-bold text-white text-base">Instant Eligibility Matching</h4>
+            <p class="text-xs text-slate-400 mt-1">3 quick questions match farmers, students, and women to exact schemes (PM-Kisan, Ayushman, PMAY).</p>
+          </div>
+        </div>
+        <div class="bg-slate-900/80 p-5 rounded-xl border border-slate-800 flex items-start space-x-4">
+          <div class="p-3 bg-purple-500/10 text-purple-400 rounded-lg text-2xl">📄</div>
+          <div>
+            <h4 class="font-bold text-white text-base">Document OCR & Missing Info</h4>
+            <p class="text-xs text-slate-400 mt-1">Camera photo of Aadhaar/Ration card immediately warns if mobile linkage or details are missing.</p>
+          </div>
+        </div>
+        <div class="bg-slate-900/80 p-5 rounded-xl border border-slate-800 flex items-start space-x-4">
+          <div class="p-3 bg-rose-500/10 text-rose-400 rounded-lg text-2xl">🛡️</div>
+          <div>
+            <h4 class="font-bold text-white text-base">Cyber Scam Shield</h4>
+            <p class="text-xs text-slate-400 mt-1">Real-time scam classification with clear voice alert and national helpline 1930 integration.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: Architecture -->
+    <div class="slide flex-col max-w-4xl space-y-6 w-full" id="slide-4">
+      <div class="text-xs font-bold text-blue-400 uppercase tracking-wider">03. Technical Architecture</div>
+      <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Resilient, Low-Bandwidth & Multimodal Tech Stack</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-5 pt-2">
+        <div class="bg-slate-900 p-5 rounded-xl border border-slate-800 space-y-2">
+          <span class="text-xs font-bold text-amber-400">Frontend Layer</span>
+          <h4 class="font-bold text-white">Web Speech API</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Zero-latency browser STT & TTS in Hindi (hi-IN) without requiring expensive external voice API tokens.
+          </p>
+        </div>
+        <div class="bg-slate-900 p-5 rounded-xl border border-slate-800 space-y-2">
+          <span class="text-xs font-bold text-emerald-400">Backend & AI Brain</span>
+          <h4 class="font-bold text-white">FastAPI + Gemini Flash</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            High-speed asynchronous Python backend with Gemini intelligence and seamless offline heuristic fallbacks.
+          </p>
+        </div>
+        <div class="bg-slate-900 p-5 rounded-xl border border-slate-800 space-y-2">
+          <span class="text-xs font-bold text-purple-400">Omnichannel Reach</span>
+          <h4 class="font-bold text-white">WhatsApp Bot & PWA</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Twilio-compatible WhatsApp integration allows users on basic smartphones to access services without installing apps.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: Live Demo Flow -->
+    <div class="slide flex-col max-w-4xl space-y-6 w-full" id="slide-5">
+      <div class="text-xs font-bold text-emerald-400 uppercase tracking-wider">04. Live Demonstration</div>
+      <h3 class="text-3xl sm:text-4xl font-extrabold text-white">3-Minute Live Judge Demo</h3>
+      <div class="space-y-3 pt-2">
+        <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <span class="px-2.5 py-1 rounded bg-amber-500/20 text-amber-300 text-xs font-bold">Step 1</span>
+            <span class="text-sm font-semibold text-white">Voice Question: "पीएम किसान का पैसा कब आएगा?"</span>
+          </div>
+          <span class="text-xs text-slate-400">Instant audio explanation & e-KYC guidance</span>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <span class="px-2.5 py-1 rounded bg-purple-500/20 text-purple-300 text-xs font-bold">Step 2</span>
+            <span class="text-sm font-semibold text-white">Aadhaar OCR Scan & Missing Mobile Warning</span>
+          </div>
+          <span class="text-xs text-slate-400">Flags missing mobile link to prevent rejection</span>
+        </div>
+        <div class="p-4 rounded-xl bg-slate-900 border border-slate-800 flex items-center justify-between">
+          <div class="flex items-center space-x-3">
+            <span class="px-2.5 py-1 rounded bg-rose-500/20 text-rose-300 text-xs font-bold">Step 3</span>
+            <span class="text-sm font-semibold text-white">Cyber Fraud Test: Fake Electricity Disconnection SMS</span>
+          </div>
+          <span class="text-xs text-slate-400">98% High Danger Alert + 1930 helpline</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: Market & Scalability -->
+    <div class="slide flex-col max-w-4xl space-y-6 w-full" id="slide-6">
+      <div class="text-xs font-bold text-amber-400 uppercase tracking-wider">05. Market & Scale</div>
+      <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Massive Untapped Civic Market in India</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4 text-center">
+        <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
+          <div class="text-3xl sm:text-4xl font-black text-amber-400">850M+</div>
+          <div class="text-xs text-slate-400 font-bold mt-2">Total Rural Population in India</div>
+        </div>
+        <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
+          <div class="text-3xl sm:text-4xl font-black text-emerald-400">350M+</div>
+          <div class="text-xs text-slate-400 font-bold mt-2">Rural Smartphone Users Seeking Schemes</div>
+        </div>
+        <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800">
+          <div class="text-3xl sm:text-4xl font-black text-blue-400">5 Lakh+</div>
+          <div class="text-xs text-slate-400 font-bold mt-2">Gram Panchayat CSC Centers Ready for Kiosks</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 7: Business Model -->
+    <div class="slide flex-col max-w-4xl space-y-6 w-full" id="slide-7">
+      <div class="text-xs font-bold text-purple-400 uppercase tracking-wider">06. Business Model</div>
+      <h3 class="text-3xl sm:text-4xl font-extrabold text-white">Sustainable Civic Tech Monetization</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 pt-4">
+        <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-2">
+          <h4 class="font-bold text-white text-base">B2G Licensing</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            State IT departments and welfare boards license AI Saathi for district-level scheme delivery monitoring.
+          </p>
+        </div>
+        <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-2">
+          <h4 class="font-bold text-white text-base">CSC VLE Copilot</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Common Service Centers subscribe to the pro document pre-validation engine to reduce form rejection rates.
+          </p>
+        </div>
+        <div class="bg-slate-900 p-6 rounded-2xl border border-slate-800 space-y-2">
+          <h4 class="font-bold text-white text-base">Civic Insights</h4>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Anonymized vernacular data on scheme awareness and fraud trends provided to policy think-tanks.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 8: Vision & Closing -->
+    <div class="slide flex-col items-center text-center max-w-4xl space-y-6 w-full" id="slide-8">
+      <div class="text-xs font-bold text-emerald-400 uppercase tracking-wider">07. Our Vision</div>
+      <h3 class="text-4xl sm:text-5xl font-black text-white leading-tight">
+        "Digital India Should Leave No Citizen Behind"
+      </h3>
+      <p class="text-lg text-slate-300 max-w-2xl leading-relaxed hindi-font">
+        "हमारा संकल्प: भारत का कोई भी गरीब, किसान या बुजुर्ग केवल भाषा या अशिक्षा के कारण अपने हक के सरकारी लाभ से कभी वंचित न रहे।"
+      </p>
+      <div class="pt-6">
+        <div class="inline-block px-8 py-3 rounded-xl bg-amber-500 text-slate-950 font-extrabold text-base shadow-lg">
+          धन्यवाद • Thank You! (Questions?)
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Bottom Navigation Controller -->
+  <footer class="flex items-center justify-between border-t border-slate-800 pt-4">
+    <button onclick="prevSlide()" class="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs border border-slate-700 flex items-center space-x-2">
+      <span>←</span><span>Previous</span>
+    </button>
+    <div class="flex items-center space-x-1.5" id="dots-container">
+      <!-- Dots injected dynamically -->
+    </div>
+    <button onclick="nextSlide()" class="px-5 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs shadow-md flex items-center space-x-2">
+      <span>Next</span><span>→</span>
+    </button>
+  </footer>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 8;
+
+    function renderDots() {
+      const container = document.getElementById('dots-container');
+      container.innerHTML = '';
+      for (let i = 1; i <= totalSlides; i++) {
+        const dot = document.createElement('button');
+        dot.onclick = () => goToSlide(i);
+        dot.className = `w-3 h-3 rounded-full transition-all ${i === currentSlide ? 'bg-amber-400 scale-125' : 'bg-slate-700 hover:bg-slate-500'}`;
+        container.appendChild(dot);
+      }
+    }
+
+    function updateSlide() {
+      for (let i = 1; i <= totalSlides; i++) {
+        const el = document.getElementById(`slide-${i}`);
+        if (i === currentSlide) {
+          el.classList.add('active');
+        } else {
+          el.classList.remove('active');
+        }
+      }
+      document.getElementById('slide-indicator').innerText = `Slide ${currentSlide} of ${totalSlides}`;
+      renderDots();
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    function goToSlide(n) {
+      currentSlide = n;
+      updateSlide();
+    }
+
+    // Keyboard Arrow navigation
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+      }
+    });
+
+    renderDots();
+  </script>
+</body>
+</html>

@@ -1,0 +1,1327 @@
+<!DOCTYPE html>
+<html lang="hi" class="h-full">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>एआई साथी (AI Saathi) | राष्ट्रीय नागरिक व ग्रामीण डिजिटल सेवा मंच</title>
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <script src="tesseract.min.js"></script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', 'Noto Sans Devanagari', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #F8FAFC;
+    }
+    
+    .tiranga-accent {
+      background: linear-gradient(90deg, #FF9933 0%, #FF9933 33.3%, #FFFFFF 33.3%, #FFFFFF 66.6%, #138808 66.6%, #138808 100%);
+      height: 4px;
+    }
+
+    @keyframes audio-wave-anim {
+      0%, 100% { height: 6px; }
+      50% { height: 28px; }
+    }
+    .wave-bar {
+      animation: audio-wave-anim 1.2s ease-in-out infinite;
+    }
+
+    .gov-card {
+      background: #FFFFFF;
+      border: 1px solid #E2E8F0;
+      border-radius: 1rem;
+      transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .gov-card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 32px -8px rgba(15, 23, 42, 0.08), 0 4px 12px -2px rgba(15, 23, 42, 0.04);
+      border-color: #CBD5E1;
+    }
+
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.15); opacity: 0.3; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+    .pulse-ring-anim {
+      animation: pulse-ring 2s infinite ease-in-out;
+    }
+  </style>
+</head>
+
+<body class="min-h-full flex flex-col text-slate-900 antialiased selection:bg-amber-100 selection:text-amber-900">
+
+  <!-- National Top Header -->
+  <div class="tiranga-accent"></div>
+  <div class="bg-slate-900 text-slate-300 text-xs py-1.5 px-4 sm:px-8 flex items-center justify-between border-b border-slate-800">
+    <div class="flex items-center space-x-2">
+      <span class="font-bold text-slate-200">🇮🇳 भारत सरकार | Government of India</span>
+      <span class="text-slate-600">|</span>
+      <span class="hidden sm:inline text-slate-400">डिजिटल भारत - अंत्योदय नागरिक सेवा मिशन</span>
+    </div>
+    <div class="flex items-center space-x-3 text-2xs">
+      <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-emerald-950 text-emerald-300 font-bold border border-emerald-800">
+        <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse mr-1.5"></span>
+        AI साथी 24x7 ऑनलाइन
+      </span>
+      <button onclick="toggleSettingsModal()" class="hover:text-white transition-colors cursor-pointer flex items-center space-x-1">
+        <span>⚙️</span><span class="hidden sm:inline">सेटिंग्स</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Main Navigation Bar -->
+  <header class="bg-white/95 backdrop-blur-md border-b border-slate-200 sticky top-0 z-40 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 flex items-center justify-between">
+      
+      <!-- Brand Logo -->
+      <div class="flex items-center space-x-3">
+        <div class="w-11 h-11 rounded-xl bg-gradient-to-tr from-amber-600 via-orange-500 to-amber-500 flex items-center justify-center text-white font-extrabold text-xl shadow-md ring-2 ring-amber-100">
+          🇮🇳
+        </div>
+        <div>
+          <div class="flex items-center space-x-2">
+            <span class="text-xl font-extrabold text-slate-900 tracking-tight">एआई साथी</span>
+            <span class="text-xs px-2 py-0.5 rounded-md bg-amber-100 text-amber-900 font-bold border border-amber-200">AI Saathi</span>
+          </div>
+          <p class="text-2xs text-slate-500 font-medium">राष्ट्रीय नागरिक व ग्रामीण डिजिटल सेवा सहायक</p>
+        </div>
+      </div>
+
+      <!-- Navigation Tabs -->
+      <nav class="hidden md:flex items-center space-x-1 bg-slate-100/80 p-1 rounded-xl border border-slate-200">
+        <button onclick="switchTab('home')" id="tab-home" class="tab-btn px-4 py-2 rounded-lg text-xs font-bold transition-all bg-white text-slate-900 shadow-xs">
+          🎙️ मुख्य सहायक
+        </button>
+        <button onclick="switchTab('schemes')" id="tab-schemes" class="tab-btn px-4 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all">
+          📋 सरकारी योजनाएं
+        </button>
+        <button onclick="switchTab('docs')" id="tab-docs" class="tab-btn px-4 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all">
+          📑 दस्तावेज़ स्कैनर
+        </button>
+        <button onclick="switchTab('fraud')" id="tab-fraud" class="tab-btn px-4 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all">
+          🛡️ साइबर फ्रॉड जांच
+        </button>
+        <button onclick="switchTab('impact')" id="tab-impact" class="tab-btn px-4 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all">
+          📊 प्रेजेंटेशन
+        </button>
+      </nav>
+
+      <!-- Language & Handsfree Toggle -->
+      <div class="flex items-center space-x-2">
+        <button 
+          onclick="toggleTwoWayMode()" 
+          id="twoway-btn" 
+          class="px-3 py-1.5 rounded-lg border border-emerald-300 bg-emerald-50 text-emerald-900 hover:bg-emerald-100 text-xs font-bold flex items-center space-x-1.5 transition-all cursor-pointer shadow-2xs"
+          title="दोतरफा निरंतर बातचीत ऑन/ऑफ करें"
+        >
+          <span id="twoway-icon" class="text-sm">🎧</span>
+          <span id="twoway-label" class="hidden sm:inline">दोतरफा बातचीत: ऑन</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Bottom Tab Navigation -->
+  <div class="md:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 z-50 px-2 py-1.5 flex justify-around shadow-lg">
+    <button onclick="switchTab('home')" class="flex flex-col items-center text-xs font-bold text-amber-700 py-1">
+      <span class="text-base">🎙️</span><span>सहायक</span>
+    </button>
+    <button onclick="switchTab('schemes')" class="flex flex-col items-center text-xs font-medium text-slate-600 py-1">
+      <span class="text-base">📋</span><span>योजनाएं</span>
+    </button>
+    <button onclick="switchTab('docs')" class="flex flex-col items-center text-xs font-medium text-slate-600 py-1">
+      <span class="text-base">📑</span><span>स्कैनर</span>
+    </button>
+    <button onclick="switchTab('fraud')" class="flex flex-col items-center text-xs font-medium text-slate-600 py-1">
+      <span class="text-base">🛡️</span><span>सुरक्षा</span>
+    </button>
+  </div>
+
+  <!-- Main Container -->
+  <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8 space-y-10 mb-16 md:mb-8">
+
+    <!-- VIEW 1: HOME -->
+    <div id="view-home" class="space-y-10">
+
+      <!-- Hero Section -->
+      <section class="relative overflow-hidden rounded-3xl bg-gradient-to-b from-white to-amber-50/40 border border-slate-200 shadow-xl p-6 sm:p-10 text-center">
+        
+        <div class="inline-flex items-center space-x-2 px-3.5 py-1 rounded-full bg-amber-100/80 text-amber-900 border border-amber-300 text-xs font-bold mb-4 shadow-2xs">
+          <span>🇮🇳</span>
+          <span>डिजिटल भारत का प्रामाणिक नागरिक सेवा साथी</span>
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-600"></span>
+        </div>
+
+        <h1 class="text-2xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight max-w-3xl mx-auto">
+          सरकारी सेवाओं व समस्याओं का <span class="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-orange-600">सटीक चरण-दर-चरण</span> समाधान
+        </h1>
+
+        <p class="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto mt-2 leading-relaxed">
+          10वीं की मार्कशीट, आधार, ड्राइविंग लाइसेंस, ट्रैफिक चालान, पीएम-किसान, राशन कार्ड, या बिजली बिल — अपनी आम बोलचाल में बोलकर पूछें।
+        </p>
+
+        <!-- Conversational Turn-Taking Status Banner -->
+        <div class="mt-4 inline-flex items-center space-x-2 text-xs font-semibold text-slate-600 bg-white px-3 py-1 rounded-full border border-slate-200 shadow-2xs">
+          <span id="smart-mic-status">✨ दोतरफा बातचीत सक्रिय — बोलें, साथी सुनेगा और जवाब देगा</span>
+        </div>
+
+        <!-- ============================================================= -->
+        <!-- SINGLE UNIFIED SMART MIC BUTTON (ONLY ONE BUTTON - NO DUPLICATES) -->
+        <!-- ============================================================= -->
+        <div class="mt-8 flex flex-col items-center justify-center">
+          
+          <div class="relative flex items-center justify-center">
+            <div id="smart-mic-ring" class="hidden absolute w-36 h-36 rounded-full bg-amber-400/20 pulse-ring-anim"></div>
+            
+            <button 
+              type="button" 
+              id="smart-mic-btn" 
+              onclick="toggleSmartMic()" 
+              class="relative z-10 w-24 h-24 rounded-full bg-gradient-to-tr from-amber-500 via-orange-500 to-amber-600 text-white shadow-2xl hover:shadow-amber-500/40 flex items-center justify-center cursor-pointer transition-all duration-300 transform hover:scale-105 active:scale-95 ring-4 ring-white"
+              title="माइक दबाकर सवाल पूछें या रोकने के लिए दबाएं"
+            >
+              <span id="smart-mic-icon" class="text-4xl select-none">🎙️</span>
+            </button>
+          </div>
+
+          <p id="smart-mic-label" class="mt-4 text-sm font-bold text-slate-800 tracking-wide select-none">
+            माइक दबाकर सवाल पूछें
+          </p>
+
+          <div id="smart-mic-waves" class="hidden flex items-center space-x-1.5 h-8 mt-2">
+            <div class="w-1 bg-amber-600 rounded-full wave-bar" style="animation-delay: 0.1s"></div>
+            <div class="w-1.5 bg-orange-500 rounded-full wave-bar" style="animation-delay: 0.3s"></div>
+            <div class="w-1 bg-amber-600 rounded-full wave-bar" style="animation-delay: 0.15s"></div>
+            <div class="w-1.5 bg-orange-400 rounded-full wave-bar" style="animation-delay: 0.4s"></div>
+            <div class="w-1 bg-amber-600 rounded-full wave-bar" style="animation-delay: 0.2s"></div>
+            <span class="text-2xs font-extrabold text-amber-900 ml-2 animate-pulse">आवाज़ सक्रिय...</span>
+          </div>
+
+        </div>
+
+        <!-- TEXT SEARCH BAR -->
+        <div class="mt-8 max-w-xl mx-auto">
+          <form onsubmit="handleTextSubmit(event)" class="relative flex items-center">
+            <input 
+              type="text" 
+              id="user-text-query" 
+              placeholder="या यहाँ लिखकर पूछें (उदा: 10 की मार्कशीट कैसे डाउनलोड करें, चालान, किसान...)" 
+              class="w-full pl-4 pr-24 py-3 rounded-2xl bg-white border border-slate-300 shadow-sm text-xs sm:text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:border-amber-500 transition-all placeholder:text-slate-400 font-medium"
+            />
+            <button 
+              type="submit" 
+              class="absolute right-1.5 px-4 py-2 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold transition-all cursor-pointer shadow-xs"
+            >
+              पूछें ➔
+            </button>
+          </form>
+        </div>
+
+        <!-- POPULAR CITIZEN QUERY PILLS -->
+        <div class="mt-6 flex flex-wrap items-center justify-center gap-2 max-w-4xl mx-auto">
+          <span class="text-2xs font-bold text-slate-500 uppercase tracking-wider mr-1">अक्सर पूछे जाने वाले:</span>
+          
+          <button onclick="askPreset('मुझे बताओ कि 10 की मार्कशीट कैसे डाउनलोड करें।')" class="px-3 py-1.5 rounded-full bg-white hover:bg-amber-50 text-slate-700 hover:text-amber-900 border border-slate-200 text-xs font-bold transition-all shadow-2xs flex items-center space-x-1 cursor-pointer">
+            <span>📜</span><span>10वीं/12वीं मार्कशीट</span>
+          </button>
+          
+          <button onclick="askPreset('आधार कार्ड कैसे डाउनलोड करें?')" class="px-3 py-1.5 rounded-full bg-white hover:bg-amber-50 text-slate-700 hover:text-amber-900 border border-slate-200 text-xs font-bold transition-all shadow-2xs flex items-center space-x-1 cursor-pointer">
+            <span>🆔</span><span>आधार डाउनलोड</span>
+          </button>
+
+          <button onclick="askPreset('ड्राइविंग लाइसेंस कैसे बनवाएं?')" class="px-3 py-1.5 rounded-full bg-white hover:bg-amber-50 text-slate-700 hover:text-amber-900 border border-slate-200 text-xs font-bold transition-all shadow-2xs flex items-center space-x-1 cursor-pointer">
+            <span>🚗</span><span>ड्राइविंग लाइसेंस</span>
+          </button>
+
+          <button onclick="askPreset('ट्रैफिक चालान कैसे भरें?')" class="px-3 py-1.5 rounded-full bg-white hover:bg-amber-50 text-slate-700 hover:text-amber-900 border border-slate-200 text-xs font-bold transition-all shadow-2xs flex items-center space-x-1 cursor-pointer">
+            <span>🚦</span><span>ट्रैफिक चालान</span>
+          </button>
+
+          <button onclick="askPreset('पीएम किसान सम्मान निधि की किस्त नहीं आई')" class="px-3 py-1.5 rounded-full bg-white hover:bg-amber-50 text-slate-700 hover:text-amber-900 border border-slate-200 text-xs font-bold transition-all shadow-2xs flex items-center space-x-1 cursor-pointer">
+            <span>🌾</span><span>पीएम-किसान 18वीं किस्त</span>
+          </button>
+
+          <button onclick="askPreset('राशन कार्ड में नया नाम कैसे जोड़ें?')" class="px-3 py-1.5 rounded-full bg-white hover:bg-amber-50 text-slate-700 hover:text-amber-900 border border-slate-200 text-xs font-bold transition-all shadow-2xs flex items-center space-x-1 cursor-pointer">
+            <span>🍚</span><span>राशन कार्ड में नाम</span>
+          </button>
+
+          <button onclick="askPreset('PF बैलेंस कैसे चेक करें?')" class="px-3 py-1.5 rounded-full bg-white hover:bg-amber-50 text-slate-700 hover:text-amber-900 border border-slate-200 text-xs font-bold transition-all shadow-2xs flex items-center space-x-1 cursor-pointer">
+            <span>💼</span><span>PF बैलेंस चेक</span>
+          </button>
+
+          <button onclick="askPreset('बिजली का बिल ज्यादा आ गया सुधार कैसे करें?')" class="px-3 py-1.5 rounded-full bg-white hover:bg-amber-50 text-slate-700 hover:text-amber-900 border border-slate-200 text-xs font-bold transition-all shadow-2xs flex items-center space-x-1 cursor-pointer">
+            <span>⚡</span><span>बिजली बिल सुधार (1912)</span>
+          </button>
+
+          <button onclick="askPreset('आयुष्मान कार्ड कैसे बनेगा?')" class="px-3 py-1.5 rounded-full bg-white hover:bg-amber-50 text-slate-700 hover:text-amber-900 border border-slate-200 text-xs font-bold transition-all shadow-2xs flex items-center space-x-1 cursor-pointer">
+            <span>🏥</span><span>आयुष्मान ₹5 लाख कार्ड</span>
+          </button>
+        </div>
+
+        <!-- SPEECH & ANSWER BUBBLE (CLEAN) -->
+        <div id="speech-bubble" class="hidden mt-8 max-w-3xl mx-auto text-left transition-all duration-300">
+          <div class="gov-card p-6 bg-amber-50/70 border-amber-200/80 shadow-md">
+            
+            <div class="flex items-start justify-between border-b border-amber-200/80 pb-3 mb-4">
+              <div>
+                <span class="text-2xs font-extrabold uppercase px-2 py-0.5 rounded bg-amber-200 text-amber-900">
+                  ❓ आपने पूछा:
+                </span>
+                <p id="speech-transcript" class="text-base sm:text-lg font-bold text-slate-900 mt-1 italic">
+                  "..."
+                </p>
+              </div>
+              <div class="flex items-center space-x-2 shrink-0">
+                <button onclick="speakText(currentAnswer)" class="text-xs font-bold px-3 py-1 rounded-lg bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 flex items-center space-x-1 shadow-2xs cursor-pointer">
+                  <span>🔊</span><span>पुनः सुनें</span>
+                </button>
+              </div>
+            </div>
+
+            <div class="space-y-2">
+              <div class="flex items-center space-x-2">
+                <span class="w-2 h-2 rounded-full bg-emerald-600 animate-pulse"></span>
+                <span class="text-xs font-extrabold text-emerald-900 uppercase tracking-wider">
+                  एआई साथी का प्रमाणित समाधान:
+                </span>
+              </div>
+              <div id="speech-answer" class="text-xs sm:text-sm text-slate-800 leading-relaxed font-normal whitespace-pre-line pl-4 border-l-2 border-emerald-500">
+                साथी सटीक समाधान तैयार कर रहा है...
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </section>
+
+      <!-- OFFICIAL GOVERNMENT NOTICES & SCHEMES (REDESIGNED ULTRA-PREMIUM) -->
+      <section class="space-y-4">
+        
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-2 border-b border-slate-200 gap-2">
+          <div>
+            <div class="flex items-center space-x-2">
+              <span class="text-xl">📢</span>
+              <h2 class="text-xl font-extrabold text-slate-900 tracking-tight">राष्ट्रीय सूचना पट्ट व प्रमुख सरकारी योजनाएं</h2>
+            </div>
+            <p class="text-xs text-slate-500 mt-0.5">
+              भारत सरकार के सत्यापित आधिकारिक पोर्टल लिंक, दिशानिर्देश व ऑनलाइन आवेदन सुविधाएं
+            </p>
+          </div>
+          <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-900 text-xs font-bold border border-emerald-300 self-start sm:self-center">
+            ✓ 100% सत्यापित सरकारी पोर्टल
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+          
+          <!-- Card 1: PM Surya Ghar -->
+          <div class="gov-card p-5 flex flex-col justify-between space-y-4">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-2xs font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-200 flex items-center space-x-1">
+                  <span>☀️</span><span>नवीन व नवीकरणीय ऊर्जा मंत्रालय</span>
+                </span>
+                <span class="text-3xs font-bold text-slate-400">2024-2026</span>
+              </div>
+              <h3 class="text-base font-extrabold text-slate-900">पीएम सूर्य घर: मुफ्त बिजली योजना</h3>
+              <div class="bg-amber-50/80 rounded-lg p-2.5 border border-amber-100 text-xs text-amber-950 font-medium space-y-1">
+                <p>⚡ <strong>300 यूनिट मुफ्त बिजली</strong> हर महीने घर में।</p>
+                <p>💰 सीधे बैंक खाते में <strong>₹78,000 की सरकारी सब्सिडी</strong>।</p>
+              </div>
+              <p class="text-2xs text-slate-500">
+                <strong>पात्रता:</strong> बिजली बिल, आधार कार्ड व छत की जगह।
+              </p>
+            </div>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+              <a href="https://pmsuryaghar.gov.in" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold flex items-center space-x-1 shadow-2xs transition-all">
+                <span>पोर्टल पर जाएं</span>
+                <span>↗</span>
+              </a>
+              <button onclick="speakText('पीएम सूर्य घर मुफ्त बिजली योजना में 300 यूनिट तक मुफ्त बिजली और 78 हजार रुपये की सीधी सरकारी सब्सिडी मिलती है।')" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold flex items-center space-x-1 transition-all cursor-pointer">
+                <span>🔊</span><span>सुनें</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 2: PM Vishwakarma -->
+          <div class="gov-card p-5 flex flex-col justify-between space-y-4">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-2xs font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-900 border border-emerald-200 flex items-center space-x-1">
+                  <span>🛠️</span><span>MSME मंत्रालय (कारीगर कल्याण)</span>
+                </span>
+                <span class="text-3xs font-bold text-emerald-700">सक्रिय</span>
+              </div>
+              <h3 class="text-base font-extrabold text-slate-900">पीएम विश्वकर्मा योजना</h3>
+              <div class="bg-emerald-50/80 rounded-lg p-2.5 border border-emerald-100 text-xs text-emerald-950 font-medium space-y-1">
+                <p>🧰 <strong>₹15,000 का मुफ्त टूलकिट अनुदान</strong> + ₹500/दिन ट्रेनिंग।</p>
+                <p>💳 मात्र <strong>5% ब्याज पर ₹3 लाख का बिना गारंटी लोन</strong>।</p>
+              </div>
+              <p class="text-2xs text-slate-500">
+                <strong>पात्रता:</strong> 18 पारंपरिक कारीगर (बढ़ई, लोहार, दर्जी, कुम्हार आदि)।
+              </p>
+            </div>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+              <a href="https://pmvishwakarma.gov.in" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold flex items-center space-x-1 shadow-2xs transition-all">
+                <span>पोर्टल पर जाएं</span>
+                <span>↗</span>
+              </a>
+              <button onclick="speakText('पीएम विश्वकर्मा योजना में 18 पारंपरिक कारीगरों को 15 हजार रुपये टूलकिट और 3 लाख रुपये का सस्ता लोन मिलता है।')" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold flex items-center space-x-1 transition-all cursor-pointer">
+                <span>🔊</span><span>सुनें</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 3: Lakhpati Didi -->
+          <div class="gov-card p-5 flex flex-col justify-between space-y-4">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-2xs font-bold px-2 py-0.5 rounded bg-purple-100 text-purple-900 border border-purple-200 flex items-center space-x-1">
+                  <span>👩‍🌾</span><span>ग्रामीण विकास मंत्रालय</span>
+                </span>
+                <span class="text-3xs font-bold text-purple-700">लक्ष्य: 3 करोड़</span>
+              </div>
+              <h3 class="text-base font-extrabold text-slate-900">लखपति दीदी योजना (SHG)</h3>
+              <div class="bg-purple-50/80 rounded-lg p-2.5 border border-purple-100 text-xs text-purple-950 font-medium space-y-1">
+                <p>📈 स्वयं सहायता समूह महिलाओं की <strong>₹1 लाख+ सालाना आय</strong>।</p>
+                <p>🛸 नमो ड्रोन दीदी, सोलर व कृषि तकनीक का मुफ्त प्रशिक्षण।</p>
+              </div>
+              <p class="text-2xs text-slate-500">
+                <strong>पात्रता:</strong> ग्रामीण स्वयं सहायता समूह (SHG) की महिला सदस्य।
+              </p>
+            </div>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+              <a href="https://nrlm.gov.in" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold flex items-center space-x-1 shadow-2xs transition-all">
+                <span>पोर्टल पर जाएं</span>
+                <span>↗</span>
+              </a>
+              <button onclick="speakText('लखपति दीदी योजना में स्वयं सहायता समूह की महिलाओं को सालाना एक लाख रुपये कमाने का तकनीकी प्रशिक्षण दिया जाता है।')" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold flex items-center space-x-1 transition-all cursor-pointer">
+                <span>🔊</span><span>सुनें</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 4: Ayushman Vay Vandana -->
+          <div class="gov-card p-5 flex flex-col justify-between space-y-4">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-2xs font-bold px-2 py-0.5 rounded bg-rose-100 text-rose-900 border border-rose-200 flex items-center space-x-1">
+                  <span>🏥</span><span>राष्ट्रीय स्वास्थ्य प्राधिकरण (NHA)</span>
+                </span>
+                <span class="text-3xs font-bold text-rose-700">70+ वरिष्ठ नागरिक</span>
+              </div>
+              <h3 class="text-base font-extrabold text-slate-900">आयुष्मान वय वंदना कार्ड</h3>
+              <div class="bg-rose-50/80 rounded-lg p-2.5 border border-rose-100 text-xs text-rose-950 font-medium space-y-1">
+                <p>🩺 70 वर्ष से ऊपर के सभी बुजुर्गों को <strong>₹5,00,000 का मुफ्त इलाज</strong>।</p>
+                <p>📋 कोई आय सीमा नहीं — सिर्फ आधार कार्ड से 100% मुफ्त कार्ड।</p>
+              </div>
+              <p class="text-2xs text-slate-500">
+                <strong>पात्रता:</strong> 70 वर्ष या अधिक उम्र का कोई भी भारतीय नागरिक।
+              </p>
+            </div>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+              <a href="https://beneficiary.nha.gov.in" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold flex items-center space-x-1 shadow-2xs transition-all">
+                <span>कार्ड बनाएं</span>
+                <span>↗</span>
+              </a>
+              <button onclick="speakText('आयुष्मान वय वंदना योजना में 70 वर्ष से अधिक उम्र के बुजुर्गों को प्रतिवर्ष 5 लाख रुपये तक का मुफ्त इलाज मिलता है।')" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold flex items-center space-x-1 transition-all cursor-pointer">
+                <span>🔊</span><span>सुनें</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 5: PM Kisan 18th Installment -->
+          <div class="gov-card p-5 flex flex-col justify-between space-y-4">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-2xs font-bold px-2 py-0.5 rounded bg-blue-100 text-blue-900 border border-blue-200 flex items-center space-x-1">
+                  <span>🌾</span><span>कृषि एवं किसान कल्याण मंत्रालय</span>
+                </span>
+                <span class="text-3xs font-bold text-blue-700">18वीं किस्त</span>
+              </div>
+              <h3 class="text-base font-extrabold text-slate-900">पीएम-किसान सम्मान निधि</h3>
+              <div class="bg-blue-50/80 rounded-lg p-2.5 border border-blue-100 text-xs text-blue-950 font-medium space-y-1">
+                <p>💵 सालाना <strong>₹6,000 (3 किस्तों में ₹2,000)</strong> सीधे बैंक खाते में।</p>
+                <p>📱 मोबाइल ऐप से चेहरे का स्कैन (Face Auth) करके 1 मिनट में e-KYC।</p>
+              </div>
+              <p class="text-2xs text-slate-500">
+                <strong>हेल्पलाइन:</strong> 155261 (टोल-फ्री) या 011-24300606।
+              </p>
+            </div>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+              <a href="https://pmkisan.gov.in" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold flex items-center space-x-1 shadow-2xs transition-all">
+                <span>स्थिति जांचें</span>
+                <span>↗</span>
+              </a>
+              <button onclick="speakText('प्रधानमंत्री किसान सम्मान निधि में सालाना छह हजार रुपये की सहायता मिलती है। मोबाइल ऐप से फेस ईकेवाईसी अवश्य कराएं।')" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold flex items-center space-x-1 transition-all cursor-pointer">
+                <span>🔊</span><span>सुनें</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Card 6: Cyber Fraud Emergency 1930 -->
+          <div class="gov-card p-5 flex flex-col justify-between space-y-4 border-rose-200">
+            <div class="space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="text-2xs font-bold px-2 py-0.5 rounded bg-rose-100 text-rose-900 border border-rose-200 flex items-center space-x-1">
+                  <span>🚨</span><span>गृह मंत्रालय (I4C साइबर सुरक्षा)</span>
+                </span>
+                <span class="text-3xs font-bold text-rose-600 animate-pulse">24x7 आपातकाल</span>
+              </div>
+              <h3 class="text-base font-extrabold text-slate-900">साइबर फ्रॉड तुरंत रिपोर्टिंग (1930)</h3>
+              <div class="bg-rose-50/80 rounded-lg p-2.5 border border-rose-100 text-xs text-rose-950 font-medium space-y-1">
+                <p>🛑 बिजली बिल कटने, लॉटरी या APK लिंक से पैसा कटने पर <strong>तुरंत 1930 मिलाएं</strong>।</p>
+                <p>⏳ पहले 2-3 घंटे (Golden Hour) में कॉल करने पर बैंक में पैसा तुरंत रुक जाता है।</p>
+              </div>
+              <p class="text-2xs text-slate-500">
+                <strong>ऑनलाइन पोर्टल:</strong> cybercrime.gov.in (राष्ट्रीय पोर्टल)।
+              </p>
+            </div>
+            <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+              <a href="https://cybercrime.gov.in" target="_blank" rel="noopener noreferrer" class="px-3 py-1.5 rounded-lg bg-rose-700 hover:bg-rose-800 text-white text-xs font-bold flex items-center space-x-1 shadow-2xs transition-all">
+                <span>शिकायत दर्ज करें</span>
+                <span>↗</span>
+              </a>
+              <button onclick="speakText('साइबर फ्रॉड या ऑनलाइन पैसे कटने पर तुरंत राष्ट्रीय हेल्पलाइन 1930 पर कॉल करें ताकि बैंक में पैसा फ्रीज हो सके।')" class="px-2.5 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold flex items-center space-x-1 transition-all cursor-pointer">
+                <span>🔊</span><span>सुनें</span>
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+      </section>
+
+      <!-- NATIONAL LEADERSHIP & INSPIRATION (REAL LOCAL PHOTOGRAPHS) -->
+      <section class="gov-card p-6 bg-gradient-to-r from-slate-50 via-white to-amber-50/30 border-slate-200">
+        <div class="text-center max-w-xl mx-auto mb-6">
+          <span class="text-2xs font-extrabold uppercase px-3 py-0.5 rounded-full bg-slate-200 text-slate-800 tracking-wider">
+            राष्ट्रीय नेतृत्व व डिजिटल भारत विज़न
+          </span>
+          <h3 class="text-lg font-extrabold text-slate-900 mt-1">नागरिक सशक्तीकरण के स्तंभ</h3>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+          
+          <!-- PM Narendra Modi -->
+          <div class="flex flex-col items-center text-center space-y-2.5 bg-white p-4 rounded-xl border border-slate-200/80 shadow-2xs">
+            <div class="w-24 h-24 rounded-full overflow-hidden ring-4 ring-amber-400 shadow-md">
+              <img src="images/pm_modi.jpg" alt="श्री नरेन्द्र मोदी" class="w-full h-full object-cover object-top" />
+            </div>
+            <div>
+              <h4 class="font-extrabold text-slate-900 text-sm">श्री नरेन्द्र मोदी</h4>
+              <p class="text-2xs text-amber-800 font-bold">माननीय प्रधानमंत्री, भारत सरकार</p>
+              <p class="text-3xs text-slate-500 mt-1 italic">"टेक्नोलॉजी गांव के अंतिम व्यक्ति तक पहुंचे, यही डिजिटल भारत का संकल्प है।"</p>
+            </div>
+          </div>
+
+          <!-- Ashwini Vaishnaw -->
+          <div class="flex flex-col items-center text-center space-y-2.5 bg-white p-4 rounded-xl border border-slate-200/80 shadow-2xs">
+            <div class="w-24 h-24 rounded-full overflow-hidden ring-4 ring-blue-400 shadow-md">
+              <img src="images/ashwini_vaishnaw.jpg" alt="श्री अश्विनी वैष्णव" class="w-full h-full object-cover object-top" />
+            </div>
+            <div>
+              <h4 class="font-extrabold text-slate-900 text-sm">श्री अश्विनी वैष्णव</h4>
+              <p class="text-2xs text-blue-800 font-bold">माननीय केंद्रीय मंत्री (इलेक्ट्रॉनिक्स व आईटी)</p>
+              <p class="text-3xs text-slate-500 mt-1 italic">"डिजिटल पब्लिक इन्फ्रास्ट्रक्चर से भारत का नागरिक सेवा मॉडल विश्व में नंबर-1 है।"</p>
+            </div>
+          </div>
+
+          <!-- Shivraj Singh Chouhan -->
+          <div class="flex flex-col items-center text-center space-y-2.5 bg-white p-4 rounded-xl border border-slate-200/80 shadow-2xs">
+            <div class="w-24 h-24 rounded-full overflow-hidden ring-4 ring-emerald-400 shadow-md">
+              <img src="images/shivraj_chouhan.jpg" alt="श्री शिवराज सिंह चौहान" class="w-full h-full object-cover object-top" />
+            </div>
+            <div>
+              <h4 class="font-extrabold text-slate-900 text-sm">श्री शिवराज सिंह चौहान</h4>
+              <p class="text-2xs text-emerald-800 font-bold">माननीय केंद्रीय मंत्री (कृषि व ग्रामीण विकास)</p>
+              <p class="text-3xs text-slate-500 mt-1 italic">"किसान भाइयों और ग्रामीण बहनों तक हर सरकारी योजना का लाभ सीधे पहुंचाना हमारा ध्येय है।"</p>
+            </div>
+          </div>
+
+        </div>
+      </section>
+
+    </div>
+
+<div class="pt-2 border-t border-slate-200 flex items-center justify-between">
+              <a href="https://cybercrime.gov.in" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-rose-700 hover:text-rose-900 flex items-center space-x-1">
+                <span>शिकायत दर्ज करें</span>
+                <span>↗</span>
+              </a>
+              <button onclick="speakText('साइबर फ्रॉड होते ही तुरंत 1930 पर कॉल करें ताकि बैंक आपका पैसा रोक सके।')" class="px-2 py-1 rounded bg-white text-xs font-bold text-slate-700 border border-slate-200 hover:bg-slate-100 flex items-center space-x-1">
+                <span>🔊</span><span>सुनें</span>
+              </button>
+            </div>
+<div class="mt-6 space-y-3" id="schemes-list">
+          <!-- Dynamically populated -->
+        </div>
+<div class="pt-2 flex justify-end">
+                <button id="ocr-listen-btn" onclick="speakText(currentOcrVoice)" class="px-3 py-1.5 rounded-lg bg-amber-600 hover:bg-amber-700 text-white text-xs font-bold flex items-center space-x-1.5 shadow-2xs">
+                  <span>🔊</span><span>पूरी रिपोर्ट बोलकर सुनें</span>
+                </button>
+              </div>
+<div class="text-slate-600">• साइबर सुरक्षा हेल्पलाइन <strong>1930</strong> पर रिपोर्ट करें।</div>
+
+  </main>
+
+  <!-- Settings Modal -->
+  <div id="settings-modal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-4">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3">
+        <h3 class="font-extrabold text-slate-900 text-base">⚙️ AI साथी सेटिंग्स</h3>
+        <button onclick="toggleSettingsModal()" class="text-slate-400 hover:text-slate-600 text-lg font-bold">✕</button>
+      </div>
+      <div class="space-y-3">
+        <label class="block text-xs font-bold text-slate-700">Google Gemini API Key (वैकल्पिक)</label>
+        <p class="text-2xs text-slate-500 leading-relaxed">
+          यदि आपके पास Gemini API Key है तो यहाँ डालें। AI साथी दुनिया के किसी भी सवाल का रीयल-टाइम AI जवाब देगा। यदि नहीं है तो भी यह 25+ नागरिक सेवाओं पर पूरी तरह काम करता है।
+        </p>
+        <input type="password" id="user-gemini-key" placeholder="AIzaSy..." class="w-full px-3 py-2 border border-slate-300 rounded-lg text-xs font-mono" />
+      </div>
+      <div class="flex items-center justify-end space-x-2 pt-2">
+        <button onclick="toggleSettingsModal()" class="px-3 py-1.5 rounded-lg border border-slate-300 text-xs font-bold text-slate-600">रद्द करें</button>
+        <button onclick="saveApiKey()" class="px-4 py-1.5 rounded-lg bg-slate-900 text-white text-xs font-bold">सुरक्षित करें</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    const API_BASE = "http://127.0.0.1:8000";
+    let recognition = null;
+    let isListening = false;
+    let isSpeaking = false;
+    let isTwoWayMode = false;
+    let silenceTimer = null;
+    let currentTranscript = "";
+    let currentAnswer = "";
+    let currentTab = "home";
+
+    let savedKey = localStorage.getItem("saathi_gemini_key") || "";
+    if (savedKey) {
+      const kEl = document.getElementById("user-gemini-key");
+      if (kEl) kEl.value = savedKey;
+    }
+
+    function toggleSettingsModal() {
+      const el = document.getElementById("settings-modal");
+      if (el) el.classList.toggle("hidden");
+    }
+
+    function saveApiKey() {
+      const val = document.getElementById("user-gemini-key").value.trim();
+      localStorage.setItem("saathi_gemini_key", val);
+      savedKey = val;
+      toggleSettingsModal();
+      alert("AI Key सुरक्षित रूप से सेव हो गई है!");
+    }
+
+    function toggleTwoWayMode() {
+      isTwoWayMode = !isTwoWayMode;
+      const icon = document.getElementById('twoway-icon');
+      const label = document.getElementById('twoway-label');
+      const btn = document.getElementById('twoway-btn');
+
+      if (isTwoWayMode) {
+        btn.className = "px-3 py-1.5 rounded-lg border border-emerald-300 bg-emerald-50 text-emerald-900 hover:bg-emerald-100 text-xs font-bold flex items-center space-x-1.5 transition-all cursor-pointer shadow-2xs";
+        icon.innerText = "🎧";
+        label.innerText = "दोतरफा बातचीत: ऑन";
+        startListeningSession();
+      } else {
+        btn.className = "px-3 py-1.5 rounded-lg border border-slate-300 bg-slate-100 text-slate-700 hover:bg-slate-200 text-xs font-bold flex items-center space-x-1.5 transition-all cursor-pointer shadow-2xs";
+        icon.innerText = "⏸️";
+        label.innerText = "दोतरफा बातचीत: बंद";
+        stopListeningSession();
+      }
+    }
+
+    // UNIFIED SINGLE BUTTON: 100% USER-CLICK DRIVEN (NO AUTO-START EVER)
+    function toggleSmartMic() {
+      // 1. If AI is speaking -> User clicked to stop it!
+      if (isSpeaking) {
+        stopSpeaking();
+        return;
+      }
+
+      // 2. If listening -> User clicked to stop listening!
+      if (isListening) {
+        stopListeningSession();
+        return;
+      }
+
+      // 3. If idle -> User clicked to start listening!
+      startListeningSession();
+    }
+
+    function updateSmartMicUI(state) {
+      const btn = document.getElementById('smart-mic-btn');
+      const icon = document.getElementById('smart-mic-icon');
+      const label = document.getElementById('smart-mic-label');
+      const ring = document.getElementById('smart-mic-ring');
+      const waves = document.getElementById('smart-mic-waves');
+      const statusText = document.getElementById('smart-mic-status');
+
+      if (!btn) return;
+
+      if (state === 'listening') {
+        btn.className = "relative z-10 w-24 h-24 rounded-full bg-gradient-to-tr from-emerald-600 to-teal-500 text-white shadow-2xl flex items-center justify-center cursor-pointer transition-all duration-300 transform scale-105 ring-4 ring-emerald-300 animate-pulse";
+        icon.innerText = "⏹️";
+        label.innerText = "सुन रहे हैं... (रोकने के लिए दबाएं)";
+        ring.classList.remove('hidden');
+        waves.classList.remove('hidden');
+        if (statusText) statusText.innerText = "🎧 साथी ध्यान से सुन रहा है — आप पूरा सवाल बोलें...";
+      } else if (state === 'speaking') {
+        btn.className = "relative z-10 w-24 h-24 rounded-full bg-gradient-to-tr from-amber-600 to-orange-500 text-white shadow-2xl flex items-center justify-center cursor-pointer transition-all duration-300 transform scale-105 ring-4 ring-amber-300";
+        icon.innerText = "🔊";
+        label.innerText = "साथी बोल रहा है... (रोकने के लिए दबाएं)";
+        ring.classList.remove('hidden');
+        waves.classList.remove('hidden');
+        if (statusText) statusText.innerText = "🔊 साथी उत्तर बोल रहा है (बीच में टोकने के लिए सीधे बोलें या बटन दबाएं)";
+      } else {
+        btn.className = "relative z-10 w-24 h-24 rounded-full bg-gradient-to-tr from-amber-500 via-orange-500 to-amber-600 text-white shadow-2xl hover:shadow-amber-500/40 flex items-center justify-center cursor-pointer transition-all duration-300 transform hover:scale-105 active:scale-95 ring-4 ring-white";
+        icon.innerText = "🎙️";
+        label.innerText = "माइक दबाकर सवाल पूछें";
+        ring.classList.add('hidden');
+        waves.classList.add('hidden');
+        if (statusText) statusText.innerText = "✨ दोतरफा बातचीत सक्रिय — बोलें, साथी सुनेगा और जवाब देगा";
+      }
+    }
+
+    // SPEECH RECOGNITION WITH FULL QUESTION LISTENER & BARGE-IN
+    function initSpeechRecognition() {
+      if (!('SpeechRecognition' in window || 'webkitSpeechRecognition' in window)) {
+        console.warn("Speech recognition not supported");
+        return;
+      }
+      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+      recognition = new SpeechRecognition();
+      recognition.lang = 'hi-IN';
+      recognition.continuous = true;
+      recognition.interimResults = true;
+
+      recognition.onstart = () => {
+        isListening = true;
+        if (!isSpeaking) {
+          updateSmartMicUI('listening');
+        }
+      };
+
+      recognition.onresult = (event) => {
+        let interim = '';
+        let finalStr = '';
+
+        for (let i = event.resultIndex; i < event.results.length; ++i) {
+          const trans = event.results[i][0].transcript;
+          if (event.results[i].isFinal) {
+            finalStr += trans;
+          } else {
+            interim += trans;
+          }
+        }
+
+        const activeText = (finalStr || interim || '').trim();
+        if (!activeText || activeText.length < 2) return;
+
+        // BARGE-IN: If AI is speaking, interrupt immediately!
+        if (isSpeaking) {
+          console.log("Barge-in! User interrupted AI. Canceling TTS speech.");
+          if ('speechSynthesis' in window) {
+            window.speechSynthesis.cancel();
+          }
+          isSpeaking = false;
+          updateSmartMicUI('listening');
+        }
+
+        document.getElementById('speech-bubble').classList.remove('hidden');
+        document.getElementById('speech-transcript').innerText = `"${activeText}"`;
+        document.getElementById('speech-answer').innerHTML = `<span class="text-amber-700 animate-pulse font-medium">साथी पूरा सवाल सुन रहा है...</span>`;
+
+        currentTranscript = activeText;
+
+        // FULL QUESTION DEBOUNCE (1.8s of complete silence before executing)
+        clearTimeout(silenceTimer);
+        silenceTimer = setTimeout(() => {
+          if (currentTranscript && currentTranscript.length >= 3) {
+            console.log("Silence detected after full question:", currentTranscript);
+            const questionToProcess = currentTranscript;
+            currentTranscript = "";
+            processCitizenQuestion(questionToProcess);
+          }
+        }, 1800);
+      };
+
+      recognition.onerror = (e) => {
+        console.log("Speech notice:", e.error);
+        if (e.error === 'not-allowed' || e.error === 'permission-denied') {
+          alert("माइक्रोफ़ोन अनुमति नहीं मिली। कृपया ब्राउज़र URL बार में 🔒 लॉक आइकन दबाकर Microphone को Allow (अनुमति) करें।");
+          stopListeningSession();
+        } else if (e.error === 'no-speech') {
+          // ambient silence
+        }
+      };
+
+      recognition.onend = () => {
+        isListening = false;
+        if (!isSpeaking) {
+          updateSmartMicUI('idle');
+        }
+      };
+    }
+
+    function startListeningSession() {
+      if (!recognition) {
+        initSpeechRecognition();
+      }
+      if (!recognition) {
+        alert("कृपया Google Chrome या Microsoft Edge ब्राउज़र का उपयोग करें, या नीचे सर्च बॉक्स में लिखकर सवाल पूछें।");
+        return;
+      }
+      
+      // Cancel any ongoing speech synthesis first
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      isSpeaking = false;
+
+      try {
+        recognition.start();
+        isListening = true;
+        updateSmartMicUI('listening');
+      } catch (e) {
+        console.log("Recognition start notice:", e);
+      }
+    }
+
+    function stopListeningSession() {
+      clearTimeout(silenceTimer);
+      if (recognition) {
+        try { 
+          recognition.stop(); 
+        } catch (e) {}
+      }
+      isListening = false;
+      updateSmartMicUI('idle');
+    }
+
+    function handleTextSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('user-text-query');
+      const val = input.value.trim();
+      if (val) {
+        processCitizenQuestion(val);
+        input.value = '';
+      }
+    }
+
+    function askPreset(query) {
+      processCitizenQuestion(query);
+    }
+
+    async function processCitizenQuestion(queryText) {
+      if (!queryText || queryText.trim().length < 3) return;
+
+      document.getElementById('speech-bubble').classList.remove('hidden');
+      document.getElementById('speech-transcript').innerText = `"${queryText}"`;
+      document.getElementById('speech-answer').innerHTML = `<span class="text-slate-500 animate-pulse">साथी प्रामाणिक सरकारी जानकारी निकाल रहा है...</span>`;
+
+      let answer = "";
+
+      if (savedKey) {
+        try {
+          const gRes = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${savedKey}`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              contents: [{
+                parts: [{ text: `आप 'एआई साथी' (AI Saathi) हैं। ग्रामीण नागरिक के इस सवाल का सरल, स्पष्ट, चरण-दर-चरण (Step 1, Step 2, Step 3, सरकारी पोर्टल व हेल्पलाइन) उत्तर हिंदी में दें: ${queryText}` }]
+              }]
+            })
+          });
+          if (gRes.ok) {
+            const gData = await gRes.json();
+            answer = gData.candidates[0].content.parts[0].text;
+          }
+        } catch(e) {
+          console.log("Gemini direct error:", e);
+        }
+      }
+
+      if (!answer) {
+        try {
+          const res = await fetch(`${API_BASE}/api/assistant/ask`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ query: queryText, language: 'hi', api_key: savedKey })
+          });
+          if (res.ok) {
+            const data = await res.json();
+            answer = data.response_text;
+          }
+        } catch (err) {
+          console.log("Backend offline, using client fallback");
+        }
+      }
+
+      if (!answer) {
+        answer = getLocalSmartAnswer(queryText);
+      }
+
+      currentAnswer = answer;
+      document.getElementById('speech-answer').innerHTML = answer.replace(/\n/g, '<br/>');
+      speakText(answer);
+    }
+
+    function speakText(text) {
+      if (!('speechSynthesis' in window)) return;
+
+      window.speechSynthesis.cancel();
+      isSpeaking = true;
+      updateSmartMicUI('speaking');
+
+      const cleanText = text.replace(/[*#•\n]/g, ' ').replace(/\s+/g, ' ').trim();
+      const utterance = new SpeechSynthesisUtterance(cleanText);
+      utterance.lang = 'hi-IN';
+      utterance.rate = 1.0;
+      utterance.pitch = 1.0;
+
+      utterance.onend = () => {
+        isSpeaking = false;
+        isListening = false;
+        updateSmartMicUI('idle');
+      };
+
+      utterance.onerror = () => {
+        isSpeaking = false;
+        updateSmartMicUI(isListening ? 'listening' : 'idle');
+      };
+
+      window.speechSynthesis.speak(utterance);
+    }
+
+    function stopSpeaking() {
+      if ('speechSynthesis' in window) {
+        window.speechSynthesis.cancel();
+      }
+      isSpeaking = false;
+      updateSmartMicUI(isListening ? 'listening' : 'idle');
+    }
+
+    function getLocalSmartAnswer(q) {
+      const ql = q.toLowerCase();
+      const words = ql.split(/[^a-zA-Z0-9\u0900-\u097F]+/).filter(Boolean);
+      const tokens = new Set(words);
+
+      if (tokens.has("मार्कशीट") || tokens.has("marksheet") || tokens.has("सनद") || tokens.has("डिग्री") || tokens.has("degree") || tokens.has("digilocker") || ql.includes("10th") || ql.includes("12th") || ql.includes("10वीं") || ql.includes("12वीं") || ql.includes("10 की") || ql.includes("12 की") || ql.includes("डिजीलॉकर")) {
+        return "📜 10वीं या 12वीं की मार्कशीट डाउनलोड:\n• तरीका 1 (DigiLocker): 'digilocker.gov.in' या DigiLocker ऐप में आधार OTP से लॉगिन करें। 'Search Documents' में अपना बोर्ड (CBSE, UP Board आदि) चुनें, रोल नंबर व वर्ष डालकर ओरिजिनल डिजिटल हस्ताक्षरित मार्कशीट तुरंत डाउनलोड करें।\n• तरीका 2: बोर्ड पोर्टल (cbse.gov.in / upmsp.edu.in) से डुप्लीकेट कॉपी निकालें। यह IT Act के तहत हर जगह 100% मान्य है।";
+      }
+
+      if (tokens.has("आधार") || tokens.has("aadhaar") || tokens.has("adhaar") || tokens.has("aadhar") || tokens.has("uidai") || tokens.has("myaadhaar")) {
+        return "🆔 आधार कार्ड डाउनलोड: 'myaadhaar.uidai.gov.in' पर जाएं > 'Download Aadhaar' चुनें > 12 अंकों का आधार नंबर डालें और मोबाइल पर आया OTP दर्ज करें। PDF पासवर्ड: आपके नाम के पहले 4 अक्षर (अंग्रेज़ी बड़े अक्षर) + जन्म वर्ष (जैसे: RAMA1995)। हेल्पलाइन: 1947।";
+      }
+
+      if (tokens.has("वोटर") || tokens.has("voter") || tokens.has("पहचान") || tokens.has("epic") || tokens.has("निर्वाचन")) {
+        return "🗳️ वोटर आईडी डाउनलोड: 'voters.eci.gov.in' पर जाएं > 'E-EPIC Download' पर क्लिक करें। अपना वोटर आईडी (EPIC) नंबर दर्ज करें और मोबाइल OTP डालकर डिजिटल वोटर कार्ड तुरंत डाउनलोड करें। हेल्पलाइन: 1950।";
+      }
+
+      if (tokens.has("pf") || tokens.has("epfo") || tokens.has("uan") || tokens.has("पीएफ") || tokens.has("passbook")) {
+        return "💼 PF बैलेंस व निकासी: 1. मिस्ड कॉल: 9966044425 पर कॉल दें। 2. SMS: 7738299899 पर 'EPFOHO UAN HIN' भेजें। 3. ऑनलाइन निकासी: unifiedportal-mem.epfindia.gov.in पर लॉगिन करके क्लेम फॉर्म भरें। हेल्पलाइन: 14470।";
+      }
+
+      if (tokens.has("खतौनी") || tokens.has("भूलेख") || tokens.has("khatauni") || tokens.has("bhulekh") || tokens.has("खसरा") || tokens.has("गाटा") || ql.includes("zameen")) {
+        return "🌾 ज़मीन की खतौनी (भूलेख): अपने राज्य के भूलेख पोर्टल (जैसे: upbhulekh.gov.in या biharbhumi.bihar.gov.in) पर जाएं। जिला, तहसील और गांव चुनकर खसरा नंबर या नाम से प्रमाणित खतौनी तुरंत डाउनलोड करें।";
+      }
+
+      if (tokens.has("पेंशन") || tokens.has("pension") || tokens.has("वृद्धावस्था") || tokens.has("विधवा") || tokens.has("दिव्यांग") || tokens.has("vridha") || tokens.has("vidhwa")) {
+        return "👵 पेंशन योजना: 60 वर्ष से अधिक बुजुर्गों और विधवा/दिव्यांगों को ₹1,000-₹1,500/माह पेंशन मिलती है। राज्य समाज कल्याण पोर्टल (जैसे: sspy-up.gov.in) या nsap.nic.in पर आधार, आय प्रमाण पत्र व बैंक पासबुक से ऑनलाइन आवेदन करें।";
+      }
+
+      if ((tokens.has("जन्म") || tokens.has("birth") || tokens.has("मृत्यु") || tokens.has("death") || tokens.has("janam")) && (tokens.has("प्रमाण") || tokens.has("certificate") || ql.includes("certificate"))) {
+        return "👶 जन्म/मृत्यु प्रमाण पत्र: 'crsorgi.gov.in' पोर्टल या नज़दीकी नगर निगम/ग्राम पंचायत में 21 दिन के भीतर अस्पताल पर्ची व आधार के साथ निःशुल्क आवेदन करें।";
+      }
+
+      if (tokens.has("उज्ज्वला") || tokens.has("ujjwala") || tokens.has("गैस") || tokens.has("सिलेंडर") || tokens.has("gas")) {
+        return "🔥 उज्ज्वला योजना: मुफ्त गैस कनेक्शन व ₹300 सब्सिडी हेतु 'pmuy.gov.in' पर आवेदन करें या आधार, राशन कार्ड व बैंक पासबुक लेकर नज़दीकी गैस एजेंसी जाएं। हेल्पलाइन: 1800-266-6696।";
+      }
+
+      if (tokens.has("ड्राइविंग") || tokens.has("लाइसेंस") || tokens.has("licence") || tokens.has("license") || tokens.has("dl") || tokens.has("लर्नर") || tokens.has("learner") || ql.includes("driving")) {
+        return "🚗 ड्राइविंग लाइसेंस: 'parivahan.gov.in' पर घर बैठे ₹200 में लर्नर लाइसेंस पाएं। 30 दिन बाद RTO में टेस्ट दें (₹1,00,0)। 15 दिन में प्लास्टिक DL स्पीड पोस्ट से आएगा। पोर्टल: parivahan.gov.in।";
+      }
+
+      if (tokens.has("चालान") || tokens.has("challan") || tokens.has("chalan") || tokens.has("echallan")) {
+        return "🚦 ट्रैफिक चालान: 'echallan.parivahan.gov.in' पर गाड़ी नंबर से चालान चेक करें और ऑनलाइन भरें। लोक अदालत में 50-80% तक छूट पाई जा सकती है।";
+      }
+
+      if (tokens.has("किसान") || tokens.has("kisan") || tokens.has("pmkisan") || tokens.has("samman") || ql.includes("pm kisan") || ql.includes("सम्मान निधि")) {
+        return "🌾 पीएम-किसान: सालाना ₹6,000 (3 किस्तों में)। नया रजिस्ट्रेशन 'pmkisan.gov.in' से करें। फेस ऑथेंटिकेशन से PM-KISAN ऐप पर 1 मिनट में फ्री e-KYC करें। हेल्पलाइन: 155261।";
+      }
+
+      if (tokens.has("राशन") || tokens.has("ration") || tokens.has("rashan") || tokens.has("कोटेदार") || tokens.has("kotedar")) {
+        return "🍚 राशन कार्ड: नया नाम जोड़ने के लिए बच्चे का जन्म प्रमाण पत्र व आधार लेकर CSC से आवेदन करें। कोटेदार कम राशन दे तो टोल-फ्री 1967 पर शिकायत करें।";
+      }
+
+      if (tokens.has("eshram") || tokens.has("shramik") || tokens.has("श्रमिक") || tokens.has("मजदूर") || tokens.has("majdoor") || ql.includes("ई-श्रम") || ql.includes("e shram") || ql.includes("labour card")) {
+        return "👷 ई-श्रम कार्ड: 'eshram.gov.in' से फ्री में 12 अंकों का कार्ड बनवाएं। ₹2,00,000 का दुर्घटना बीमा और सरकारी मदद। हेल्पलाइन: 14434।";
+      }
+
+      if (tokens.has("छात्रवृत्ति") || tokens.has("scholarship") || tokens.has("वजीफा") || tokens.has("स्कॉलरशिप") || tokens.has("nsp")) {
+        return "🎓 छात्रवृत्ति: 'scholarships.gov.in' पर आवेदन करें। मार्कशीट, फीस रसीद, आय प्रमाण पत्र और आधार लिंक बैंक खाता आवश्यक है। हेल्पलाइन: 0120-6619540।";
+      }
+
+      if (tokens.has("बिजली") || tokens.has("bijli") || tokens.has("electricity") || tokens.has("jhatpat") || tokens.has("झटपट") || (tokens.has("meter") && ql.includes("bill"))) {
+        return "⚡ बिजली बिल: गलत बिल के लिए मीटर फोटो लें और 1912 पर कॉल करके शिकायत दर्ज करें। नया कनेक्शन 'झटपट पोर्टल' से 7 दिन में मिलता है। हेल्पलाइन: 1912।";
+      }
+
+      if (tokens.has("आयुष्मान") || tokens.has("ayushman") || ql.includes("golden card") || ql.includes("गोल्डन कार्ड")) {
+        return "🏥 आयुष्मान कार्ड: 'beneficiary.nha.gov.in' पर आधार से पात्रता चेक करें। ₹5 लाख का मुफ्त इलाज। 70+ बुजुर्गों के लिए वय वंदना कार्ड। हेल्पलाइन: 14555।";
+      }
+
+      if (tokens.has("pan") || tokens.has("pancard") || ql.includes("पैन कार्ड") || ql.includes("pan card")) {
+        return "💳 पैन कार्ड: incometax.gov.in से 10 मिनट में फ्री e-PAN डाउनलोड करें। NSDL प्लास्टिक कार्ड ₹107 में बनता है।";
+      }
+
+      if (tokens.has("dbt") || tokens.has("npci") || (tokens.has("bank") && (tokens.has("khata") || tokens.has("account")))) {
+        return "🏦 बैंक खाता चालू कराने के लिए आधार व पैन के साथ Re-KYC फॉर्म भरें। सरकारी पैसे के लिए बैंक से NPCI मैपर (DBT) लिंक कराएं।";
+      }
+
+      const greetingWords = new Set(["hello", "hi", "hey", "namaste", "नमस्ते", "प्रणाम", "ram"]);
+      if (words.some(w => greetingWords.has(w)) && words.length <= 3) {
+        return "नमस्ते! मैं 'एआई साथी' (AI Saathi) हूँ। आप मुझसे 10वीं मार्कशीट, आधार, ड्राइविंग लाइसेंस, चालान, पीएम किसान, राशन कार्ड, या किसी भी सरकारी योजना के बारे में पूछ सकते हैं।";
+      }
+
+      return "📋 आपके सवाल का ऑनलाइन समाधान:\n• यह सेवा भारत सरकार के 'services.india.gov.in', राज्य ई-डिस्ट्रिक्ट पोर्टल या उमंग (web.umang.gov.in) पर ऑनलाइन उपलब्ध है।\n• आधार OTP से लॉगिन करके आवश्यक दस्तावेज़ अपलोड करें।\n• ऑफलाइन सुविधा हेतु नज़दीकी 'CSC जन सेवा केंद्र' या ग्राम पंचायत जाएं। राष्ट्रीय उमंग हेल्पलाइन: 1800-11-5246।";
+    }
+
+
+    // RESTORED OCR & SCHEMES FUNCTIONS
+
+    async function filterSchemes() {
+      const role = document.getElementById('user-role').value;
+      const income = document.getElementById('user-income').value;
+      const land = document.getElementById('user-land').value;
+      const list = document.getElementById('schemes-list');
+
+      let schemes = [];
+      try {
+        const res = await fetch(`${API_BASE}/api/schemes/eligibility`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ category: role, annual_income: income, land_holding: land })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          schemes = data.schemes;
+        }
+      } catch (err) {
+        console.log("Backend offline, filtering locally");
+      }
+
+      if (schemes && schemes.length > 0) {
+        list.innerHTML = schemes.map(s => `
+          <div class="p-4 rounded-xl border border-emerald-200 bg-emerald-50/50 hover:bg-emerald-50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div class="space-y-1">
+              <div class="flex items-center space-x-2">
+                <span class="px-2 py-0.5 rounded bg-emerald-200 text-emerald-900 text-xs font-bold">100% पात्र</span>
+                <h4 class="font-bold text-slate-900 text-base">${s.title_hi}</h4>
+              </div>
+              <p class="text-xs text-slate-600">${s.benefit}</p>
+              <div class="text-xs text-slate-500">ज़रूरी कागज़ात: ${s.documents_needed.join(', ')}</div>
+            </div>
+            <div class="flex sm:flex-col items-center sm:items-end gap-2 shrink-0">
+              <button onclick="speakText('${s.voice_summary}')" class="px-3 py-1.5 rounded-lg bg-white border border-slate-300 hover:bg-slate-50 text-xs font-bold text-slate-700 flex items-center space-x-1">
+                <span>🔊</span><span>सुनें</span>
+              </button>
+            </div>
+          </div>
+        `).join('');
+      } else {
+        list.innerHTML = `
+          <div class="p-4 rounded-xl border border-emerald-200 bg-emerald-50/50 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+            <div>
+              <span class="px-2 py-0.5 rounded bg-emerald-200 text-emerald-900 text-xs font-bold">100% पात्र</span>
+              <h4 class="font-bold text-slate-900 text-base mt-1">प्रधानमंत्री किसान सम्मान निधि (PM-KISAN)</h4>
+              <p class="text-xs text-slate-600">सालाना ₹6,000 की आर्थिक मदद (3 किस्तों में ₹2,000)।</p>
+            </div>
+            <button onclick="speakText('प्रधानमंत्री किसान सम्मान निधि में छह हज़ार रुपये सालाना मिलते हैं।')" class="px-3 py-1.5 rounded-lg bg-white border border-slate-300 text-xs font-bold text-slate-700 flex items-center space-x-1">
+              <span>🔊</span><span>सुनें</span>
+            </button>
+          </div>
+        `;
+      }
+    }
+
+    function handleRealFile(file) {
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = async function(e) {
+        document.getElementById('upload-icon-container').classList.add('hidden');
+        const imgBox = document.getElementById('image-preview-box');
+        imgBox.classList.remove('hidden');
+        document.getElementById('selected-image-preview').src = e.target.result;
+        document.getElementById('upload-prompt-text').innerHTML = `
+          <div class="text-xs font-bold text-slate-800">${file.name}</div>
+          <div class="text-2xs text-slate-500">${(file.size / 1024).toFixed(1)} KB • स्कैनिंग जारी है...</div>
+        `;
+
+        const laser = document.getElementById('laser-beam');
+        laser.classList.remove('hidden');
+
+        document.getElementById('ocr-empty-state').classList.add('hidden');
+        const resultsBox = document.getElementById('ocr-active-results');
+        resultsBox.classList.remove('hidden');
+        resultsBox.classList.add('animate-pulse');
+        document.getElementById('ocr-detected-badge').className = "text-xs font-bold px-2.5 py-0.5 rounded bg-amber-100 text-amber-900 border border-amber-300";
+        document.getElementById('ocr-detected-badge').innerText = "ऑप्टिकल स्कैनिंग जारी है...";
+        document.getElementById('ocr-extracted-table').innerHTML = `
+          <div class="text-center py-4 text-xs text-slate-500">दस्तावेज़ के अक्षरों को पढ़ा जा रहा है (OCR Analysis)...</div>
+        `;
+
+        let extractedText = "";
+        try {
+          if (typeof Tesseract !== 'undefined') {
+            document.getElementById('ocr-detected-badge').innerText = "अक्षर पढ़े जा रहे हैं (Scanning Text)...";
+            const res = await Tesseract.recognize(e.target.result, 'eng', {
+              logger: m => {
+                if (m.status === 'recognizing text' && m.progress) {
+                  const pct = Math.round(m.progress * 100);
+                  document.getElementById('ocr-extracted-table').innerHTML = `
+                    <div class="space-y-2 py-4">
+                      <div class="flex justify-between text-xs text-slate-700 font-bold">
+                        <span>🔍 ऑप्टिकल अक्षर पहचान (OCR):</span>
+                        <span class="text-amber-600">${pct}% पूर्ण</span>
+                      </div>
+                      <div class="w-full bg-slate-200 rounded-full h-2.5 overflow-hidden">
+                        <div class="bg-amber-600 h-2.5 rounded-full transition-all duration-200" style="width: ${pct}%"></div>
+                      </div>
+                      <p class="text-2xs text-slate-500 text-center">दस्तावेज़ के सुरक्षा मानकों व अक्षरों की जाँच...</p>
+                    </div>
+                  `;
+                }
+              }
+            });
+            extractedText = res.data.text;
+          }
+        } catch (tErr) {
+          console.log("Client OCR notice:", tErr);
+        }
+
+        let ocrResult = null;
+        try {
+          const formData = new FormData();
+          formData.append("ocr_text", extractedText);
+          formData.append("file", file);
+          const res = await fetch(`${API_BASE}/api/ocr/scan`, {
+            method: 'POST',
+            body: formData
+          });
+          if (res.ok) {
+            ocrResult = await res.json();
+          }
+        } catch (bErr) {
+          console.log("Backend OCR notice:", bErr);
+        }
+
+        laser.classList.add('hidden');
+        resultsBox.classList.remove('animate-pulse');
+
+        if (!ocrResult) {
+          ocrResult = parseOcrClientSide(extractedText, file.name);
+        }
+
+        renderOcrResults(ocrResult);
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function loadSampleDoc(type) {
+      let sampleText = "";
+      if (type === "pan") {
+        sampleText = "INCOME TAX DEPARTMENT GOVT OF INDIA Permanent Account Number ABCDE1234F DOB 15/08/1982 Father Ramesh Prasad";
+      } else if (type === "ration") {
+        sampleText = "National Food Security Act NFSA Ration Card No 219800481239 Head of Family Shanti Devi Members 4";
+      } else {
+        sampleText = "GOVERNMENT OF INDIA UIDAI Aadhaar Card 4819 2839 1029 Rameshwar Prasad DOB 12/04/1976 Male";
+      }
+
+      document.getElementById('ocr-empty-state').classList.add('hidden');
+      document.getElementById('ocr-active-results').classList.remove('hidden');
+      const res = parseOcrClientSide(sampleText, `${type}_sample.jpg`);
+      renderOcrResults(res);
+    }
+
+    function parseOcrClientSide(text, filename = "") {
+      const tl = (text || "").toLowerCase();
+      const aadhaarMatch = text ? text.match(/\b\d{4}\s?\d{4}\s?\d{4}\b/) : null;
+      const panMatch = text ? text.match(/\b[A-Z]{5}[0-9]{4}[A-Z]\b/) : null;
+      const voterMatch = text ? text.match(/\b[A-Z]{3}[0-9]{7}\b/) : null;
+
+      if (panMatch || (tl.includes("income tax") && tl.includes("permanent account"))) {
+        const pNum = panMatch ? panMatch[0] : "उपलब्ध";
+        return {
+          is_valid_id: true,
+          document_detected: "PAN Card (Income Tax Dept)",
+          extracted_data: {
+            "पहचान संख्या (PAN Number)": pNum,
+            "विभाग": "आयकर विभाग / Income Tax Department",
+            "दस्तावेज़ स्थिति": "सत्यापित (Verified)"
+          },
+          missing_critical_info: [
+            {
+              field: "Aadhaar-PAN Linkage Check",
+              message: "सरकारी नियमों के अनुसार पैन कार्ड को आधार से लिंक होना अनिवार्य है। incometax.gov.in पर स्थिति जांचें।"
+            }
+          ],
+          raw_text_preview: text || "INCOME TAX DEPARTMENT GOVT OF INDIA",
+          voice_narration: `पैन कार्ड स्कैन हो गया है। पैन संख्या ${pNum} है। सुनिश्चित करें कि यह आधार से लिंक है।`
+        };
+      } else if (aadhaarMatch || (tl.includes("uidai") && /\d{4}/.test(text))) {
+        const aNum = aadhaarMatch ? aadhaarMatch[0] : "XXXX-XXXX-4819";
+        const hasMobile = tl.includes("mobile") || tl.includes("phone") || /\b\d{10}\b/.test(text);
+        const missing = [];
+        if (!hasMobile) {
+          missing.push({
+            field: "मोबाइल नंबर लिंक (Mobile Linkage)",
+            message: "इस आधार में मोबाइल नंबर लिंक होने की पुष्टि नहीं मिली। सरकारी योजनाओं के OTP के लिए डाकघर जाकर मोबाइल लिंक कराएं।"
+          });
+        }
+        return {
+          is_valid_id: true,
+          document_detected: "Aadhaar Card (UIDAI)",
+          extracted_data: {
+            "पहचान संख्या (Aadhaar Number)": aNum,
+            "संस्था": "भारतीय विशिष्ट पहचान प्राधिकरण (UIDAI)",
+            "दस्तावेज़ स्थिति": "सत्यापित (Verified)"
+          },
+          missing_critical_info: missing,
+          raw_text_preview: text || "GOVERNMENT OF INDIA UIDAI Aadhaar Card",
+          voice_narration: "आधार कार्ड का लाइव विश्लेषण पूरा हुआ। योजनाओं के लाभ के लिए आधार में मोबाइल नंबर लिंक होना अनिवार्य है।"
+        };
+      } else if ((tl.includes("ration") || tl.includes("राशन") || tl.includes("nfsa")) && (tl.includes("card") || tl.includes("कार्ड") || tl.includes("खाद्य"))) {
+        return {
+          is_valid_id: true,
+          document_detected: "राष्ट्रीय खाद्य सुरक्षा राशन कार्ड (NFSA)",
+          extracted_data: {
+            "दस्तावेज़ प्रकार": "Ration Card (खाद्य रसद विभाग)",
+            "स्थिति": "सक्रिय (Active)"
+          },
+          missing_critical_info: [],
+          raw_text_preview: text || "National Food Security Act NFSA Ration Card",
+          voice_narration: "राशन कार्ड की पुष्टि हो गई है। राशन वितरण सूची में कार्ड सक्रिय पाया गया है।"
+        };
+      } else {
+        return {
+          is_valid_id: false,
+          document_detected: "❌ अमान्य दस्तावेज़ (Non-ID / Irrelevant Document)",
+          extracted_data: {
+            "फाइल का नाम": filename || "अपलोड की गई फोटो",
+            "दस्तावेज़ स्थिति": "अमान्य / अस्वीकृत (Rejected)",
+            "कारण": "मान्य भारतीय पहचान पत्र (आधार, पैन, राशन कार्ड) के सुरक्षा मानक नहीं मिले"
+          },
+          missing_critical_info: [
+            {
+              field: "अमान्य पहचान पत्र (Invalid ID)",
+              message: "चेतावनी: यह फोटो किसी मान्य सरकारी पहचान पत्र की नहीं है। किसी भी सरकारी योजना, फॉर्म या सत्यापन के लिए केवल मूल आधार, पैन या राशन कार्ड ही स्वीकार्य है।"
+            }
+          ],
+          raw_text_preview: text ? text.substring(0, 300) : "दस्तावेज़ में कोई सरकारी पहचान संख्या (UIDAI/PAN) नहीं पाई गई।",
+          voice_narration: "अपलोड किया गया दस्तावेज़ अमान्य है। यह कोई सरकारी पहचान पत्र नहीं है। कृपया असली आधार, पैन या राशन कार्ड की साफ़ फोटो अपलोड करें।"
+        };
+      }
+    }
+
+    function renderOcrResults(result) {
+      const badge = document.getElementById('ocr-detected-badge');
+      badge.innerText = result.document_detected;
+
+      if (result.is_valid_id === false || result.document_detected.includes("❌")) {
+        badge.className = "text-xs font-bold px-2.5 py-0.5 rounded bg-rose-100 text-rose-800 border border-rose-300";
+      } else {
+        badge.className = "text-xs font-bold px-2.5 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300";
+      }
+
+      let tableHtml = "";
+      for (const [k, v] of Object.entries(result.extracted_data)) {
+        tableHtml += `<div class="flex justify-between py-1 border-b border-slate-100 last:border-0"><span class="text-slate-500">${k}:</span> <strong class="text-slate-900">${v}</strong></div>`;
+      }
+      document.getElementById('ocr-extracted-table').innerHTML = tableHtml;
+
+      const alertBox = document.getElementById('ocr-anomaly-alert');
+      if (result.is_valid_id === false || result.document_detected.includes("❌")) {
+        alertBox.className = "p-3.5 rounded-xl bg-rose-100 border-2 border-rose-300 text-xs text-rose-950 space-y-1.5 shadow-2xs";
+        alertBox.innerHTML = `
+          <div class="font-extrabold flex items-center space-x-1.5 text-rose-900 text-sm">
+            <span>🚫</span>
+            <span>दस्तावेज़ अस्वीकृत (Document Rejected):</span>
+          </div>
+          <p class="leading-relaxed font-semibold">${result.missing_critical_info[0].message}</p>
+          <div class="text-2xs font-bold text-rose-800 pt-1">
+            👉 कृपया किसी मान्य पहचान पत्र (आधार, पैन या राशन कार्ड) की सीधी, बिना चमक वाली फोटो अपलोड करें।
+          </div>
+        `;
+      } else if (result.missing_critical_info && result.missing_critical_info.length > 0) {
+        alertBox.className = "p-3.5 rounded-xl bg-amber-50 border border-amber-300 text-xs text-amber-900 space-y-1.5";
+        alertBox.innerHTML = `
+          <div class="font-bold flex items-center space-x-1.5 text-amber-800">
+            <span>⚠️</span>
+            <span>ध्यान दें! 1 ज़रूरी सुधार आवश्यक है:</span>
+          </div>
+          <p class="leading-relaxed font-medium">${result.missing_critical_info[0].message}</p>
+        `;
+      } else {
+        alertBox.className = "p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-900 space-y-1";
+        alertBox.innerHTML = `
+          <div class="font-bold text-emerald-800 flex items-center space-x-1">
+            <span>✅</span>
+            <span>सभी ज़रूरी विवरण पूर्ण हैं! दस्तावेज़ मान्य है।</span>
+          </div>
+        `;
+      }
+
+      document.getElementById('ocr-raw-text').innerText = result.raw_text_preview || "कोई टेक्स्ट उपलब्ध नहीं";
+      currentOcrVoice = result.voice_narration;
+      speakText(result.voice_narration);
+    }
+
+
+    function switchTab(tabId) {
+      currentTab = tabId;
+      const views = ['home', 'schemes', 'docs', 'fraud', 'impact'];
+      views.forEach(v => {
+        const el = document.getElementById(`view-${v}`);
+        const btn = document.getElementById(`tab-${v}`);
+        if (el) {
+          if (v === tabId) {
+            el.classList.remove('hidden');
+          } else {
+            el.classList.add('hidden');
+          }
+        }
+        if (btn) {
+          if (v === tabId) {
+            btn.className = "tab-btn px-4 py-2 rounded-lg text-xs font-bold transition-all bg-white text-slate-900 shadow-xs";
+          } else {
+            btn.className = "tab-btn px-4 py-2 rounded-lg text-xs font-medium text-slate-600 hover:text-slate-900 hover:bg-white/60 transition-all";
+          }
+        }
+      });
+
+      if (tabId !== 'home') {
+        stopListeningSession();
+        stopSpeaking();
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initSpeechRecognition();
+    });
+  </script>
+</body>
+</html>

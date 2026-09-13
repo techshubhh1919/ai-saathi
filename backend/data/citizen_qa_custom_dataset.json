@@ -1,0 +1,66 @@
+[
+  {
+    "id": 1,
+    "key": "aadhar_no_address_proof",
+    "category": "Local Documents - Hindi",
+    "language": "Hindi",
+    "user_query": "Mujhe naya Aadhar Card banwana hai aur address proof nahi hai, main kya karu?",
+    "ai_response": "Agar aapke paas address proof nahi hai, toh aap inn tariko se Aadhar Card banwa sakte hain:\n\n1. **Aadhar Head of Family (HoF) Option:** Aap apne kisi parivar ke sadasya (jaise mata, pita, ya pati/patni) ke Aadhar card aur relationship proof (Ration Card, Marriage Certificate) ke zariye apna address update/new Aadhar banwa sakte hain.\n2. **UIDAI Standard Format Form:** Aap UIDAI ke 'Standard Certificate Form' ko Gazette Officer, Village Panchayat Head (Pradhan), ya Tehsildar se sign aur stamp karwa kar address proof ke roop me use kar sakte hain.\n\n**Aage kya karein?**\nNear nearest Aadhar Seva Kendra par appointment book karke jayein ya CSC Center par sampark karein."
+  },
+  {
+    "id": 2,
+    "key": "income_certificate_rejected",
+    "category": "Student Problems - English",
+    "language": "English",
+    "user_query": "I am a college student and my Income Certificate (Aay Praman Patra) got rejected. What are the common reasons and how to fix it?",
+    "ai_response": "Income Certificate rejections usually happen due to missing documents or incorrect income declarations. Here is how to fix it:\n\n**Common Reasons for Rejection:**\n1. Missing supporting documents (Ration Card, Salary Slip, or Self-Declaration/Affidavit).\n2. Mismatch in details between Aadhar Card and application.\n3. Incorrect family income selection on the portal.\n\n**Step-by-Step Solution:**\n1. Check the rejection reason mentioned on your state's e-District portal dashboard.\n2. Re-apply online with an updated **Self-Declaration Form (Swaghoshna Patra)**.\n3. Attach Aadhar Card, Bank Passbook, and your parent's salary slip/affidavit.\n4. Contact your local Lekhpal/Patwari to verify the application promptly."
+  },
+  {
+    "id": 3,
+    "key": "pm_kisan_bhojpuri_stopped",
+    "category": "Government Schemes - Bhojpuri",
+    "language": "Bhojpuri",
+    "user_query": "PM Kisan Samman Nidhi ke paisa hamra khata me nahi aawata, ka kare ke pari?",
+    "ai_response": "Ruaar PM Kisan ke kist rooke ke do-teen go mukhya kaaran ho sakela. Aisan sahi kare ke upay dekhin:\n\n1. **e-KYC Poora Karien:** Apne mobile se PM Kisan portal par jaake OTP ke zariye e-KYC poora karien, ya fir nazdiki CSC (Common Service Center) jaake biometric se e-KYC karwa li'n.\n2. **Aadhar Bank Link (NPCI Mapping):** Aapan Aadhar card ke aapan bank khata se link karwa li'n (DBT active hona zaroori ba).\n3. **Land Seeding Checking:** PM Kisan portal par 'Beneficiary Status' check karien. Agar 'Land Seeding' NO dekhat ba, ta aapan Khatauni ke photo copy leke Block ya Krishi Vibhag ke office me jama karien.\n\nE sab sahi bhala ke baad aagil kist aawel shuru ho jaai."
+  },
+  {
+    "id": 4,
+    "key": "ration_card_add_member",
+    "category": "Local Issues - Hindi",
+    "language": "Hindi",
+    "user_query": "Ration Card me naye sadasya (bache ya bahu) ka naam kaise jodwa sakte hain?",
+    "ai_response": "Ration Card me naya naam judwane ke liye niche diye gaye steps follow karein:\n\n**Zaroori Documents:**\n* **Bache ke liye:** Janm Praman Patra (Birth Certificate) aur Mata-Pita ka Aadhar Card.\n* **Bahu ke liye:** Shaadi ka Praman Patra (Marriage Certificate), Pati ka Aadhar, aur purane Ration Card se naam hatne ka praman (Surrender Slip).\n\n**Prikriya (Process):**\n1. Apne rajya ke Food & Civil Supplies Portal (jaise e-District/CSC) par online apply karein.\n2. Online form ki copy aur saare documents attach karke apne K खाद्य aapurti vibhag (Food Inspector office) me jama karein.\n3. Verification ke baad 15-30 dino me naam jod diya jata hai."
+  },
+  {
+    "id": 5,
+    "key": "scholarship_pending_correction",
+    "category": "Student Problems - Hindi",
+    "language": "Hindi",
+    "user_query": "UP Scholarship / Bihar Student Credit Card ka status pending bata raha hai, correction kaise karein?",
+    "ai_response": "Scholarship status me pending ya error aane par yeh kadam uthayein:\n\n1. **Correction Window Check Karein:** Portal par log-in karke dekhein ki 'Correction Window' open hai ya nahi.\n2. **Reason Identify Karein:** Agar status me 'Roll Number Mismatch', 'Income Not Verified', ya 'Attendance Less than 75%' dikha raha hai, toh correction section me sahi detail update karein.\n3. **College Contact Karein:** Correction karne ke baad, updated form ki printout aur supporting documents apne college/institute ke scholarship cell me jama karein taaki wo ise aage forward kar sakein."
+  },
+  {
+    "id": 6,
+    "key": "caste_certificate_delay_bhojpuri",
+    "category": "Local Issues - Bhojpuri",
+    "language": "Bhojpuri",
+    "user_query": "Jati Praman Patra (Caste Certificate) banwawe me bahut deri ho rahal ba, kauno rasta ba?",
+    "ai_response": "Jati Praman Patra banwaye me deri ho rahal ba ta e tareeka apnaien:\n\n1. **e-District Portal Status Check:** Sabse pahile aapan application number se e-District website par status check karien ki aawedan Lekhpal/Tehsildar ke paas ba ki aage badh gail ba.\n2. **Lekhpal/Patwari se Sampark:** Local Lekhpal se mili'n aur aapan purana vansaawali ya parivar ke kisi sadasya ka purana Jati Praman Patra dikhai'n.\n3. **Jansunwai / Samadhan Diwas:** Agar limit time (15 din) se beshi ho gail ba, ta rajya ke Jansunwai portal par shikayat darj karien ya Tehsil me Samadhan Diwas ke din application di'n."
+  },
+  {
+    "id": 7,
+    "key": "pm_vishwakarma_ayushman",
+    "category": "Government Schemes - English",
+    "language": "English",
+    "user_query": "How to apply for PM Vishwakarma Yojana or Ayushman Bharat Card locally?",
+    "ai_response": "Here is the simple step-by-step process to apply for these schemes:\n\n**1. For Ayushman Bharat Card (Free Health Coverage up to ₹5 Lakh):**\n* Visit `beneficiary.nha.gov.in` or download the Ayushman App.\n* Login using your mobile number, enter your Ration Card number or Aadhar number to check eligibility.\n* Complete e-KYC via Aadhar OTP or face authentication to download your card instantly.\n\n**2. For PM Vishwakarma Yojana (For Artisans/Craftspeople):**\n* Visit your nearest CSC (Common Service Center) with your Aadhar Card, Bank Passbook, and registered Mobile Number.\n* Choose your trade (e.g., carpenter, blacksmith, tailor, mason).\n* The Gram Panchayat or Urban Local Body will verify your application, after which you get free skill training and collateral-free loan benefits."
+  },
+  {
+    "id": 8,
+    "key": "electricity_wrong_bill_meter",
+    "category": "Local Documents - Hindi",
+    "language": "Hindi",
+    "user_query": "Bijli ka bill galat aa gaya hai ya meter kharab hai, complaint kaise darj karein?",
+    "ai_response": "Galat bijli bill ya kharab meter ki problem solve karne ke liye yeh steps follow karein:\n\n1. **Online Portal / Helpline:** Apne rajya ke bijli vibhag ke toll-free number (jaise 1912) par call karke complaint number lein.\n2. **Written Application:** Ek application likhein jisme apna Consumer Account Number (K-No/Account ID), purana sahi bill, aur naye galat bill ki copy lagayein.\n3. **SDO / Executive Engineer Office:** Ye application apne kshetra ke SDO office me submit karein aur receiving copy zaroor lein.\n4. **Meter Check Request:** Agar meter tez chal raha hai ya kharab hai, toh 'Meter Check Request' ka form bharein. Department lab testing ke baad bill revise kar deta hai."
+  }
+]
